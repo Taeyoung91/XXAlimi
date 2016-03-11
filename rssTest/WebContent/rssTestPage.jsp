@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<% //탭 4개의 스타일이 적용된 RSS 피드 - Google AJAX Feed API 사용 %>
 		<% //출처 : http://blog.naver.com/whitefre/140075585046 %>
-		<title>Tabbed Feed Control - Google AJAX Feed API Sample</title>
+		<title>Tabbed Feed Control - Google AJAX Feed API Sample1</title>
 		<% //스타일 적용 %>
 		<style type="text/css">
 			body *, table *,
