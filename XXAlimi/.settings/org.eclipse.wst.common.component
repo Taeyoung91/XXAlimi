@@ -4,6 +4,7 @@
 		<property name="context-root" value="XXAlimi"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+		<wb-resource deploy-path="/" source-path="src/main/webapp"/>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-aop/1.3.3.RELEASE/f80c290f6a3dccb8255a594795a20048c63460da/spring-boot-starter-aop-1.3.3.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
@@ -22,9 +23,6 @@
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-mobile/1.3.3.RELEASE/269ae1c0fbba3a35fd06bf0c5a05bafdb26fd037/spring-boot-starter-mobile-1.3.3.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
-		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-security/1.3.3.RELEASE/bb649df7b53ab5dc09780d63067400a240e3f366/spring-boot-starter-security-1.3.3.RELEASE.jar">
-			<dependency-type>uses</dependency-type>
-		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.session/spring-session/1.0.2.RELEASE/1e79a213b93357a6c7a2870c9ca64e536e3ab800/spring-session-1.0.2.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
@@ -38,6 +36,18 @@
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket/1.3.3.RELEASE/f281c47f3f15e710fd39337f34fc31b7ad054840/spring-boot-starter-websocket-1.3.3.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.webjars.bower/jquery/2.2.2/198885a9ce5ee979c5464049e29c9ca8d26a7f44/jquery-2.2.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.webjars.bower/bootstrap/3.3.6/3b2a3e581ff5ba320922a40aed3518518c0cb6c/bootstrap-3.3.6.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/74aca283cd4f4b4f3e425f5820cda58f44409547/jstl-1.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-jasper/8.0.32/a9c540cee7c330f01cb37d47a488cfd67b91dcdf/tomcat-embed-jasper-8.0.32.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/com.h2database/h2/1.4.191/dec3540178ea889b2871b0ed56db14bbec9cfdfc/h2-1.4.191.jar">
@@ -82,12 +92,6 @@
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.mobile/spring-mobile-device/1.1.5.RELEASE/8c4f007c7bfe0dcf9f276fd358c1e42648c78f4d/spring-mobile-device-1.1.5.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
-		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-config/4.0.3.RELEASE/31c0a4d0159f1b668d9512f57fb46aac29949b08/spring-security-config-4.0.3.RELEASE.jar">
-			<dependency-type>uses</dependency-type>
-		</dependent-module>
-		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-web/4.0.3.RELEASE/5f0233d94ca53ac8710780b43791f633f970480a/spring-security-web-4.0.3.RELEASE.jar">
-			<dependency-type>uses</dependency-type>
-		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-config/1.1.4.RELEASE/c341d4dca239dbd2a50bc94cc294ea80b5658700/spring-social-config-1.1.4.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
@@ -119,6 +123,9 @@
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework/spring-websocket/4.2.5.RELEASE/3046dcf47cd01cf33a4d931a9738e540ecb5a92f/spring-websocket-4.2.5.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.4.2/71d67f5bab9465ec844596ef844f40902ae25392/ecj-4.4.2.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/1.3.3.RELEASE/641cc375499d444e4efbc1801902260daa79758d/spring-boot-1.3.3.RELEASE.jar">
@@ -185,9 +192,6 @@
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-juli/8.0.32/71471069cea029dfdce0735337864c7d0a3d9992/tomcat-juli-8.0.32.jar">
-			<dependency-type>uses</dependency-type>
-		</dependent-module>
-		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/4.0.3.RELEASE/9f420c5742ad063970c5d33f60680a1cee777aa5/spring-security-core-4.0.3.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar">

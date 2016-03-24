@@ -2,8 +2,8 @@ package com.anonyblah.xxalimi.infrastructure.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.anonyblah.xxalimi.domain.model.entity.User;
+import com.anonyblah.xxalimi.domain.model.entity.Feed;
 
-public interface UserDao extends JpaRepository<User, Integer> {
+public interface FeedDao extends JpaRepository<Feed, String> {
 
 }

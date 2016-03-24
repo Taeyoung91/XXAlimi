@@ -36,11 +36,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-security/1.3.3.RELEASE/b1c03efcbd95d4d3d0894f325466b6700345d6ad/spring-boot-starter-security-1.3.3.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-security/1.3.3.RELEASE/bb649df7b53ab5dc09780d63067400a240e3f366/spring-boot-starter-security-1.3.3.RELEASE.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
 	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.session/spring-session/1.0.2.RELEASE/efd561d3034b3bbd9759eb63a5e1825e5bf70bb/spring-session-1.0.2.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.session/spring-session/1.0.2.RELEASE/1e79a213b93357a6c7a2870c9ca64e536e3ab800/spring-session-1.0.2.RELEASE.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
@@ -62,6 +57,26 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket/1.3.3.RELEASE/df05c56f0f9abea68cf1c57d83b995669cb4ffa3/spring-boot-starter-websocket-1.3.3.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket/1.3.3.RELEASE/f281c47f3f15e710fd39337f34fc31b7ad054840/spring-boot-starter-websocket-1.3.3.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.webjars.bower/jquery/2.2.2/b04f3ee8f5e43fa3b162981b50bb72fe1acabb33/jquery-2.2.2-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.webjars.bower/jquery/2.2.2/198885a9ce5ee979c5464049e29c9ca8d26a7f44/jquery-2.2.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.webjars.bower/bootstrap/3.3.6/b04f3ee8f5e43fa3b162981b50bb72fe1acabb33/bootstrap-3.3.6-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.webjars.bower/bootstrap/3.3.6/3b2a3e581ff5ba320922a40aed3518518c0cb6c/bootstrap-3.3.6.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/2f5877ef15adb721421e80f5aa2b6fe069eec8ed/jstl-1.2-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/74aca283cd4f4b4f3e425f5820cda58f44409547/jstl-1.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-jasper/8.0.32/2dcfe19b2b866182b9f45cf0bd8ebd855372d2b1/tomcat-embed-jasper-8.0.32-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-jasper/8.0.32/a9c540cee7c330f01cb37d47a488cfd67b91dcdf/tomcat-embed-jasper-8.0.32.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
@@ -146,16 +161,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-config/4.0.3.RELEASE/bd3bb4fe94511bb792756965b165af95a48481ad/spring-security-config-4.0.3.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-config/4.0.3.RELEASE/31c0a4d0159f1b668d9512f57fb46aac29949b08/spring-security-config-4.0.3.RELEASE.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-web/4.0.3.RELEASE/55f9964e0833d0d116a94d5b8eaf3fa30d429c98/spring-security-web-4.0.3.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-web/4.0.3.RELEASE/5f0233d94ca53ac8710780b43791f633f970480a/spring-security-web-4.0.3.RELEASE.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
 	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-config/1.1.4.RELEASE/26047f8b110f07fad06eb043d10a6657dacf113b/spring-social-config-1.1.4.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-config/1.1.4.RELEASE/c341d4dca239dbd2a50bc94cc294ea80b5658700/spring-social-config-1.1.4.RELEASE.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
@@ -217,6 +222,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-el/8.0.32/acc238ee9c71aa2a5048375e38262adb7fb3680d/tomcat-embed-el-8.0.32-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-el/8.0.32/82adf8bd959fc046d55490e6f2ce67297c91d62b/tomcat-embed-el-8.0.32.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.4.2/903e8c2cb521cc91636eccae66b8594435516ff5/ecj-4.4.2-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.4.2/71d67f5bab9465ec844596ef844f40902ae25392/ecj-4.4.2.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
@@ -362,11 +372,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-juli/8.0.32/7f3ddcb5c29c1d79f985e881c39c09a7f4705401/tomcat-juli-8.0.32-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-juli/8.0.32/71471069cea029dfdce0735337864c7d0a3d9992/tomcat-juli-8.0.32.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/4.0.3.RELEASE/fe41f2a695aecf48d566a71d0cf16bad4da08e22/spring-security-core-4.0.3.RELEASE-sources.jar" kind="lib" path="C:/Users/Kloc/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/4.0.3.RELEASE/9f420c5742ad063970c5d33f60680a1cee777aa5/spring-security-core-4.0.3.RELEASE.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
