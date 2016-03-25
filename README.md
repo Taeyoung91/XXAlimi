@@ -17,6 +17,8 @@ rssTest : Google Feed Api를 사용한 RSS 사용 예제 (1개의 jsp파일)
 현재 예상되는 문제점
 - 긁어가는게 막힌 사이트는 새로운 API(ex. Jsoup)를 써서 긁어와야 된다 
 
-실행요구사항
-- Spring Boot
+실행 전 필요한 것
+- Gradle
 - <a href="https://github.com/skyidelete/XXAlimi/wiki/Project-Lombok">Project Lombok</a> (https://projectlombok.org/)
+
+실행 방법 : cmd환경 project폴더에서 gradle bootRun 실행
