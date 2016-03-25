@@ -19,4 +19,4 @@ rssTest : Google Feed Api를 사용한 RSS 사용 예제 (1개의 jsp파일)
 
 실행요구사항
 - Spring Boot
-- Project Lombok (https://projectlombok.org/)
+- <a href="https://github.com/skyidelete/XXAlimi/wiki/Project-Lombok">Project Lombok</a> (https://projectlombok.org/)
