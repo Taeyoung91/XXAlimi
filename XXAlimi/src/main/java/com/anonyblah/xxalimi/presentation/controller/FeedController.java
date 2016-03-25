@@ -13,15 +13,29 @@ import com.anonyblah.xxalimi.func.rss.RSSFeedParser;
 import com.anonyblah.xxalimi.infrastructure.dao.ArticleDao;
 import com.anonyblah.xxalimi.infrastructure.dao.FeedDao;
 
+/**
+ * Feed 관리 Controller
+ * @see FeedDao
+ * @see ArticleDao
+ */
 @Controller
 public class FeedController {
 	
-	@Autowired
+	@Autowired	// Spring이 자동으로 Set
 	private FeedDao feedDao;
+	
+	/**
+	 * @deprecated
+	 */
 	@Autowired
 	private ArticleDao articleDao;
 	
-	@RequestMapping("/home")
+	/**
+	 * Feed들을 모두 가져와 JSPContext에 넣어두고 home View를 불러온다.
+	 * @param model JSPContext
+	 * @return 표시할 View의 이름
+	 */
+	@RequestMapping("/home")		// "/home"으로 요청이 들어오면 이 Method 실행
 	public String home(Model model) {
 		List<Feed> feedList = feedDao.findAll();
 		model.addAttribute("feedList", feedList);
@@ -29,7 +43,14 @@ public class FeedController {
 		return "home";
 	}
 	
-	@RequestMapping("/home/{title}")
+	/**
+	 * Feed를 눌렀을 때 그 Feed에서 갱신해온 게시글을 보여주는 View를 호출
+	 * @param	model JSPContext
+	 * @param title Feed의 이름
+	 * @return 표시할 View의 이름
+	 */
+	@RequestMapping("/home/{title}") 
+	//{title}은 @PathVariable로 Annotation된 매개변수 title을 사용하기 위해 쓰임
 	public String viewFeed(Model model, @PathVariable String title) {
 		Feed feed = feedDao.findOne(title);
 		model.addAttribute("feed", feed);
@@ -37,6 +58,10 @@ public class FeedController {
 		return "feedView";
 	}
 	
+	/**
+	 * FeedFresh 버튼을 눌렀을 때 RSS 주소에서 긁어와 FeedDao에 저장
+	 * @return 표시할 View의 이름
+	 */
 	@RequestMapping("/home/refreshFeed")
 	public String refreshFeed() {
 		RSSFeedParser rssFeedParser = new RSSFeedParser("http://www.vogella.com/article.rss", articleDao);

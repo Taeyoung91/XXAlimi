@@ -15,7 +15,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
+/**
+ *  Feed Entity, RSS 2.0 기준
+ * 	<pre>
+ *  title: Feed의 이름
+ *  description: Feed의 설명문
+ *  link: Feed의 WebSite URL
+ *  language: Feed가 작성된 언어
+ *  copyright: Feed안의 Content에 대한 저작권 내용
+ *  pubDate: Feed내의 각 Content가 게시된 날짜
+ *  entries: Feed가 가지고 있는 게시글을 표현한 List
+ * </pre>
+ *  참고 RSS 2.0 규격 http://naearu.tistory.com/2982748
+ */
+@Getter	
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,8 +47,8 @@ public class Feed {
 	String copyright;
 	String pubDate;
 	
+	// 1:N 연결을 나타내는 Annotation
 	@OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
-	//@ElementCollection(fetch = FetchType.EAGER)
-	//Entity에 List멤벼 변수가 있으면 예외가 뜬다. 위는 그것을 막아주는 Annotation
+	// Feed가 가지고 있는 게시글들
 	List<Article> entries = new ArrayList<Article>();
 }
