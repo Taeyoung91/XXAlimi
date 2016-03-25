@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anonyblah.xxalimi.domain.model.entity.Feed;
+import com.anonyblah.xxalimi.func.rss.MyException;
 import com.anonyblah.xxalimi.func.rss.RSSFeedParser;
 import com.anonyblah.xxalimi.infrastructure.dao.ArticleDao;
 import com.anonyblah.xxalimi.infrastructure.dao.FeedDao;
@@ -65,8 +66,9 @@ public class FeedController {
 	@RequestMapping("/home/refreshFeed")
 	public String refreshFeed() {
 		RSSFeedParser rssFeedParser = new RSSFeedParser("http://www.vogella.com/article.rss", articleDao);
-		feedDao.save(rssFeedParser.readFeed());
+		Feed feed = rssFeedParser.readFeed();
 		
+		feedDao.save(feed);
 		return "redirect:/home";
 	}
 }

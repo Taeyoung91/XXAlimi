@@ -11,6 +11,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.anonyblah.xxalimi.domain.model.entity.Article;
 import com.anonyblah.xxalimi.domain.model.entity.Feed;
 import com.anonyblah.xxalimi.infrastructure.dao.ArticleDao;
@@ -28,7 +30,7 @@ public class RSSFeedParser {
 	static final String GUID = "guid";
 
 	final URL url;
-
+	
 	private ArticleDao articleDao;
 	
 	public RSSFeedParser(String feedUrl, ArticleDao articleDao) {
@@ -100,14 +102,16 @@ public class RSSFeedParser {
 					}
 				} else if (event.isEndElement()) {
 					if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
+						
 						Article article = new Article();
 						article.setAuthor(author);
 						article.setDescription(description);
 						article.setGuid(guid);
 						article.setLink(link);
 						article.setTitle(title);
-						event = eventReader.nextEvent();
+						article.setFeed(feed);
 						articleDao.save(article);
+						event = eventReader.nextEvent();
 						continue;
 					}
 				}
