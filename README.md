@@ -16,3 +16,7 @@ rssTest : Google Feed Api를 사용한 RSS 사용 예제 (1개의 jsp파일)
 
 현재 예상되는 문제점
 - 긁어가는게 막힌 사이트는 새로운 API(ex. Jsoup)를 써서 긁어와야 된다 
+
+실행요구사항
+- Spring Boot
+- Project Lombok (https://projectlombok.org/)
