@@ -37,7 +37,7 @@ import lombok.ToString;
 public class Feed {
 	@Id
 	String title;
-	
+	 
 	@Size(max=10000)
 	String link;
 	@Size(max=10000)
