@@ -40,7 +40,7 @@ public class Feed {
 	 
 	@Size(max=10000)
 	String link;
-	@Size(max=10000)
+	@Size(max=100000000)
 	String description;
 	String language;
 	@Size(max=10000)

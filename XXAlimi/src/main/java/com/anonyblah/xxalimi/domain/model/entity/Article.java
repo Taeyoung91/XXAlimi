@@ -41,7 +41,7 @@ public class Article {
 	
 	@Size(max=10000)
 	String title;
-	@Size(max=10000)
+	@Size(max=100000000)
 	String description;
 	@Size(max=10000)
 	String link;
