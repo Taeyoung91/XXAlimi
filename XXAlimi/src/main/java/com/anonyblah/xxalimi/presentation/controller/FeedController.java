@@ -14,14 +14,14 @@ import com.anonyblah.xxalimi.infrastructure.dao.ArticleDao;
 import com.anonyblah.xxalimi.infrastructure.dao.FeedDao;
 
 /**
- * Feed °ü¸® Controller
+ * Feed ê´€ë¦¬ Controller
  * @see FeedDao
  * @see ArticleDao
  */
 @Controller
 public class FeedController {
 	
-	@Autowired	// SpringÀÌ ÀÚµ¿À¸·Î Set
+	@Autowired	// Springì—ì„œ ìë™ìœ¼ë¡œ Set
 	private FeedDao feedDao;
 	
 	/**
@@ -31,11 +31,11 @@ public class FeedController {
 	private ArticleDao articleDao;
 	
 	/**
-	 * FeedµéÀ» ¸ğµÎ °¡Á®¿Í JSPContext¿¡ ³Ö¾îµÎ°í home View¸¦ ºÒ·¯¿Â´Ù.
+	 * Feedëª©ë¡ì„ ë¶ˆëŸ¬ì™€ JSPContextì— ë‹´ì•„ì™€ home Viewì—ì„œ FeedListë¥¼ ì‚¬ìš©
 	 * @param model JSPContext
-	 * @return Ç¥½ÃÇÒ ViewÀÇ ÀÌ¸§
+	 * @return í‘œì‹œí•  Viewì˜ ì´ë¦„
 	 */
-	@RequestMapping("/home")		// "/home"À¸·Î ¿äÃ»ÀÌ µé¾î¿À¸é ÀÌ Method ½ÇÇà
+	@RequestMapping("/home")		// "/home"ìœ¼ë¡œ ìš”ì²­ì´ ë“¤ì–´ì™”ì„ë•Œ ì´ Method í˜¸ì¶œ
 	public String home(Model model) {
 		List<Feed> feedList = feedDao.findAll();
 		model.addAttribute("feedList", feedList);
@@ -44,13 +44,13 @@ public class FeedController {
 	}
 	
 	/**
-	 * Feed¸¦ ´­·¶À» ¶§ ±× Feed¿¡¼­ °»½ÅÇØ¿Â °Ô½Ã±ÛÀ» º¸¿©ÁÖ´Â View¸¦ È£Ãâ
+	 * Feedë¥¼ ëˆ„ë¥´ë©´ ê·¸ í”¼ë“œì˜ Articleë“¤ì„ ë³´ì—¬ì£¼ê¸° ìœ„í•œ View Method
 	 * @param	model JSPContext
-	 * @param title FeedÀÇ ÀÌ¸§
-	 * @return Ç¥½ÃÇÒ ViewÀÇ ÀÌ¸§
+	 * @param title Feedì˜ ì´ë¦„
+	 * @return í‘œì‹œí•  Viewì˜ ì´ë¦„
 	 */
 	@RequestMapping("/home/{title}") 
-	//{title}Àº @PathVariable·Î AnnotationµÈ ¸Å°³º¯¼ö titleÀ» »ç¿ëÇÏ±â À§ÇØ ¾²ÀÓ
+	//{title}ì€ @PathVariableë¼ëŠ” Annotationì´ ë¶™ì€ ë§¤ê°œë³€ìˆ˜ titleì„ ì‚¬ìš©
 	public String viewFeed(Model model, @PathVariable String title) {
 		Feed feed = feedDao.findOne(title);
 		model.addAttribute("feed", feed);
@@ -59,8 +59,8 @@ public class FeedController {
 	}
 	
 	/**
-	 * FeedFresh ¹öÆ°À» ´­·¶À» ¶§ RSS ÁÖ¼Ò¿¡¼­ ±Ü¾î¿Í FeedDao¿¡ ÀúÀå
-	 * @return Ç¥½ÃÇÒ ViewÀÇ ÀÌ¸§
+	 * FeedFreshë¼ëŠ” ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ì •í•´ì§„ URIì—ì„œ Feedë¥¼ ì½ì–´ ì €ì¥í•˜ê³  ë‹¤ì‹œ Homeìœ¼ë¡œ Redirect
+	 * @return í‘œì‹œí•  Viewì˜ ì´ë¦„
 	 */
 	@RequestMapping("/home/refreshFeed")
 	public String refreshFeed() {

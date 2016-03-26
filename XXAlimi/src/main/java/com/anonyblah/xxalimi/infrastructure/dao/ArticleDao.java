@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.anonyblah.xxalimi.domain.model.entity.Article;
 
 /**
- * Article Data Access Object, JPA Repository(DataÀÇ À¯Çü, DataÀÇ PrimaryÅ°ÀÇ À¯Çü)¸¦ »ó¼Ó¹ŞÀ½
+ * Article Data Access Object, JPA Repository(Dataì˜ ìœ í˜•, Dataì˜ Primary Keyì˜ ìœ í˜•)ì„ ìƒì†ë°›ìŒ
  * @see Article
  */
 public interface ArticleDao extends JpaRepository<Article, Integer> {

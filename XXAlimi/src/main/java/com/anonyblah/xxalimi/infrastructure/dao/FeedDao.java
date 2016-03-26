@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.anonyblah.xxalimi.domain.model.entity.Feed;
 
 /**
- * Feed Data Access Object, JPA Repository(DataÀÇ À¯Çü, DataÀÇ PrimaryÅ°ÀÇ À¯Çü)¸¦ »ó¼Ó¹ŞÀ½
+ * Feed Data Access Object, JPA Repository(Dataì˜ ìœ í˜•, Dataì˜ Primary Keyì˜ ìœ í˜•)ì„ ìƒì†ë°›ìŒ
  * @see Feed
  */
 public interface FeedDao extends JpaRepository<Feed, String> {

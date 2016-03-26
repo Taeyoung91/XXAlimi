@@ -13,28 +13,28 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  °Ô½Ã±Û Entity
+ *  ê²Œì‹œê¸€ Entity
  * 	<pre>
- *  id: °Ô½Ã±ÛÀÇ IDÀÌÀÚ PrimaryÅ°
- *  feed: ÀÌ °Ô½Ã±ÛÀ» °¡Áö°í ÀÖ´Â Feed
- *  title: °Ô½Ã±ÛÀÇ Á¦¸ñ
- *  description: °Ô½Ã±ÛÀÇ ÁÙ°Å¸®(¿ä¾à¹®)
- *  link: °Ô½Ã±Û URL
- *  author: ÀÛ¼ºÀÚÀÇ Email ÁÖ¼Ò
- *  guid: °Ô½Ã±ÛÀ» À¯ÀÏÇÏ°Ô ±¸ºĞÇØÁÖ´Â ±¸ºĞÀÚ
- *  content: (±Ô°İ¿¡ ´ëÀÀÇÏ´Â °ª ¾øÀ½, deprecated)
+ *  id: ê²Œì‹œê¸€ì˜ ID, Primary Key
+ *  feed: ì´ ê²Œì‹œê¸€ì„ ê°€ì§€ê³  ìˆëŠ” Feed
+ *  title: ê²Œì‹œê¸€ì˜ ì œëª©
+ *  description: ê²Œì‹œê¸€ì˜ ì¤„ê±°ë¦¬
+ *  link: ê²Œì‹œê¸€ URL
+ *  author: ê²Œì‹œìì˜ Email
+ *  guid: ê²Œì‹œê¸€ì„ ìœ ì¼í•˜ê²Œ êµ¬ë¶„í•´ì£¼ëŠ” êµ¬ë¶„ì
+ *  content: (RSS í‘œì¤€ ê·œê²©ì— ì—†ëŠ” ì†ì„±, deprecated)
  * </pre>
- *  Âü°í RSS 2.0 ±Ô°İ http://naearu.tistory.com/2982748
+ *  ì°¸ê³  RSS 2.0 í‘œì¤€ ê·œê²© http://naearu.tistory.com/2982748
  */
 @Setter
 @Getter
 @Entity
 public class Article {
-	@Id	// ¸â¹ö º¯¼ö id¸¦ primary keyÀÓÀ» ¸í½Ã
-	@GeneratedValue	// DB¿¡ ÀÇÇØ ÀÚµ¿ÀûÀ¸·Î °ªÀÌ ºÎ¿©µÊ
+	@Id	// ì´ Feildê°€ Primary Keyì„ì„ ì•Œë¦¼
+	@GeneratedValue	// DBì—ì„œ ìë™ìœ¼ë¡œ ìƒì„±í•´ì£¼ëŠ” ê°’ì„ì„ ì•Œë¦¼
 	int id;
 	
-	// N:1 ¿¬°áÀ» ³ªÅ¸³»´Â Annotation
+	// N:1 ê´€ê³„ Annotation
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "feed_name")
 	private Feed feed;

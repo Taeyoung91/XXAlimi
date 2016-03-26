@@ -16,17 +16,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- *  Feed Entity, RSS 2.0 ±âÁØ
+ *  Feed Entity, RSS 2.0 ê·œê²©
  * 	<pre>
- *  title: FeedÀÇ ÀÌ¸§
- *  description: FeedÀÇ ¼³¸í¹®
- *  link: FeedÀÇ WebSite URL
- *  language: Feed°¡ ÀÛ¼ºµÈ ¾ğ¾î
- *  copyright: Feed¾ÈÀÇ Content¿¡ ´ëÇÑ ÀúÀÛ±Ç ³»¿ë
- *  pubDate: Feed³»ÀÇ °¢ Content°¡ °Ô½ÃµÈ ³¯Â¥
- *  entries: Feed°¡ °¡Áö°í ÀÖ´Â °Ô½Ã±ÛÀ» Ç¥ÇöÇÑ List
+ *  title: Feedì˜ ì´ë¦„, Primary Key
+ *  description: Feedì˜ ì„¤ëª…
+ *  link: Feedì˜ WebSite URL
+ *  language: Feedê°€ ì‘ì„±ëœ ì–¸ì–´
+ *  copyright: Feedì•ˆì˜ Contentì— ëŒ€í•œ ì €ì‘ê¶Œ ë‚´ìš©
+ *  pubDate: Feedë‚´ì˜ ê° Contentê°€ ê²Œì‹œëœ ë‚ ì§œ
+ *  entries: Feedê°€ ê°€ì§€ê³  ìˆëŠ” ê²Œì‹œê¸€ List
  * </pre>
- *  Âü°í RSS 2.0 ±Ô°İ http://naearu.tistory.com/2982748
+ *  ì°¸ê³  RSS 2.0 í‘œì¤€ ê·œê²© http://naearu.tistory.com/2982748
  */
 @Getter	
 @Setter
@@ -47,8 +47,7 @@ public class Feed {
 	String copyright;
 	String pubDate;
 	
-	// 1:N ¿¬°áÀ» ³ªÅ¸³»´Â Annotation
+	// 1:N ê´€ê³„ë¥¼ ë‚˜íƒ€ë‚´ëŠ” Annotation
 	@OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
-	// Feed°¡ °¡Áö°í ÀÖ´Â °Ô½Ã±Ûµé
 	List<Article> entries = new ArrayList<Article>();
 }
