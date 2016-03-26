@@ -19,6 +19,6 @@ rssTest : Google Feed Api를 사용한 RSS 사용 예제 (1개의 jsp파일)
 
 실행 전 필요한 것
 - Gradle
-- <a href="https://github.com/skyidelete/XXAlimi/wiki/Project-Lombok">Project Lombok</a> (https://projectlombok.org/)
+- (IDE 환경에서 필요) <a href="https://github.com/skyidelete/XXAlimi/wiki/Project-Lombok">Project Lombok</a> (https://projectlombok.org/)
 
 실행 방법 : cmd환경 project폴더에서 gradle bootRun 실행
