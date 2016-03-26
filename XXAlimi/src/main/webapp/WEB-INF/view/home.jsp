@@ -53,7 +53,7 @@
 						</p>
 						<hr class="medium">
 						<div class="row">
-							<c:forEach var="Article" items="${feed.entries}" end="2">
+							<c:forEach var="article" items="${feed.entries}" end="2">
 								<div class="col-md-4 col-sm-4 text-center">
 									<div class="servies-item">
 										<span class="fa-stack fa-4x">
@@ -61,7 +61,7 @@
 											<i class="fa fa-cloud fa-stack-1x text-primary"></i>
 										</span>
 										<h3>
-											<strong>${Article.title}</strong>
+											<strong>${article.title}</strong>
 										</h3>
 										<h5>
 											posted by ${article.author}
