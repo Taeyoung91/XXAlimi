@@ -11,10 +11,12 @@
 <title>Homepage - XXAlimi ver 0.0.1</title>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="css/stylish-portfolio.css">
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/stylish-portfolio.css">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+	rel="stylesheet" type="text/css">
 </head>
 <body>
 	<!-- Navigation -->
@@ -28,6 +30,9 @@
 		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >Start
 				Bootstrap</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Home</a></li>
+		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
+		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
+		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>
 
@@ -36,7 +41,8 @@
 	<div class="text-vertical-center">
 		<h1>XXAlimi</h1>
 		<h3>ver 0.0.1 for Team AnonyBlah</h3>
-		<br> <a href="/home/refreshFeed" class="btn btn-dark btn-lg">Refresh RSS</a>
+		<br> <a href="/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
+			RSS</a>
 	</div>
 	</header>
 
@@ -45,30 +51,24 @@
 			<div class="col-lg-10 col-lg-offset-1 text-center">
 				<c:forEach var="feed" items="${feedList}">
 					<div class="feed-preview">
-						<a href="/home/${feed.title}">
+						<a href="/home/feed/${feed.title}">
 							<h2 class="post-title">${feed.title}</h2>
 						</a>
-						<p class="post-meta">
-							updated on ${feed.pubDate}
-						</p>
+						<p class="post-meta">updated on ${feed.pubDate}</p>
 						<hr class="medium">
 						<div class="row">
 							<c:forEach var="article" items="${feed.entries}" end="2">
 								<div class="col-md-4 col-sm-4 text-center">
 									<div class="servies-item">
-										<span class="fa-stack fa-4x">
-											<i class="fa fa-circle fa-stack-2x"></i>
-											<i class="fa fa-cloud fa-stack-1x text-primary"></i>
+										<span class="fa-stack fa-4x"> <i
+											class="fa fa-circle fa-stack-2x"></i> <i
+											class="fa fa-cloud fa-stack-1x text-primary"></i>
 										</span>
 										<h3>
 											<strong>${article.title}</strong>
 										</h3>
-										<h5>
-											posted by ${article.author}
-										</h5>
-										<p>
-											${article.description}
-										</p>
+										<h5>posted by ${article.author}</h5>
+										<p>${article.description}</p>
 										<a class="btn btn-info" href="${article.link}">Go to read!</a>
 									</div>
 								</div>
@@ -79,26 +79,30 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>XXAlimi</strong>
-                    </h4>
-                    <p>ver 0.0.1<br>Team AnonyBlah</p>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; Hansung Univ. Capstone Design 2016</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-1 text-center">
+				<h4>
+					<strong>XXAlimi</strong>
+				</h4>
+				<p>
+					ver 0.0.1<br>Team AnonyBlah
+				</p>
+				<hr class="small">
+				<p class="text-muted">Copyright &copy; Hansung Univ. Capstone
+					Design 2016</p>
+			</div>
+		</div>
+	</div>
+	</footer>
 
 
 	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
 	<!-- Custom Theme JavaScript -->
-    <script>
+	<script>
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
