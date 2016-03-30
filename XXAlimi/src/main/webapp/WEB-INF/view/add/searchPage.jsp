@@ -28,24 +28,38 @@ function setModalTitle() {
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- Header -->
-	<header id="top" class="header">
-	<div class="text-vertical-center">
-		<h1>XXAlimi</h1>
-		<h3>ver 0.0.1 for Team AnonyBlah</h3>
-		<br> <a href="/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
-			RSS</a>
-	</div>
-	</header>
+	<!-- Navigation -->
+	<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i
+		class="fa fa-bars"></i></a>
+	<nav id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		<a id="menu-close" href="#"
+			class="btn btn-light btn-lg pull-right toggle"><i
+			class="fa fa-times"></i></a>
+		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
+		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
+		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
+		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
+		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
+	</ul>
+	</nav>
 
+	<aside class="callout" style="padding:15px">
+	<div class="text-vertical-center">
+	<h1>RSS Feed 추가하기</h1>
+	<p>
+		검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
+	</p>
+	<p><br /></p>
+	<p>
 	<div class="row">
-		<div class="col-lg-6">
-			<form method="post" onsubmit="return onSubmit()">
+    	<div class="col-lg-4 col-lg-offset-4">
+			<form method="post" onsubmit="return onSubmit()" class="form-horizontal">
 				<div class="input-group">
-					<input id="input" type="text" class="form-control" placeholder="검색어 입력...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit"
-						data-toggle="modal" data-target="#searchResultModal">Search!</button>
+					<input id="input" type="text" class="form-control"
+						placeholder="검색어 입력..."> <span class="input-group-btn">
+						<button class="btn btn-default" type="submit" data-toggle="modal"
+							data-target="#searchResultModal">Search!</button>
 					</span>
 				</div>
 				<!-- /input-group -->
@@ -54,35 +68,15 @@ function setModalTitle() {
 		<!-- /.col-lg-6 -->
 	</div>
 	<!-- /.row -->
-
-	<!-- Modal -->
-	<div class="modal fade" id="searchResultModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="searchResultModalTitle">""의 검색 결과</h4>
-				</div>
-				<div id="feedControl" class="modal-body">
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Add RSS Feed!</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	</p>
+	<p></p>
+	<p>
 	<div class="row">
-		<div class="col-lg-6">
-			<form action="/add/save" name=insertForm method="post" >
+    	<div class="col-lg-4 col-lg-offset-4">
+			<form action="/add/save" name=insertForm method="post">
 				<div class="input-group">
-					<input type="text" id="feedUrl" name=feedUrl class="form-control" placeholder="URL 입력...">
-					<span class="input-group-btn">
+					<input type="text" id="feedUrl" name=feedUrl class="form-control"
+						placeholder="URL 입력..."> <span class="input-group-btn">
 						<button class="btn btn-default" type="submit">Save!</button>
 					</span>
 				</div>
@@ -92,7 +86,38 @@ function setModalTitle() {
 		<!-- /.col-lg-6 -->
 	</div>
 	<!-- /.row -->
-
+	</p>
+	</div>
+	</aside>
+	<!-- Modal -->
+	<div class="modal fade" id="searchResultModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="searchResultModalTitle">""의 검색 결과</h4>
+				</div>
+				<div id="feedControl" class="modal-body"></div>
+				<div class="modal-footer">
+					<nav>
+					<ul class="pagination">
+						<li class="disabled"><a href="#" aria-label="Previous"><span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+						<li><a href="#" aria-label="Next"> <span
+								aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+					</nav>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- <form action="/add/save" name=insertForm method=get>
 		<table border=0 width=600 align=center>
 			<tr>
@@ -127,6 +152,16 @@ function setModalTitle() {
 	$('#searchResultModal').on('shown.bs.modal', function () {
 		setModalTitle();
 	})
+	    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
 	</script>
 
 </body>

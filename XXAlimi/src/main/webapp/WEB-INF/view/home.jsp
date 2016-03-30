@@ -27,8 +27,7 @@
 		<a id="menu-close" href="#"
 			class="btn btn-light btn-lg pull-right toggle"><i
 			class="fa fa-times"></i></a>
-		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >Start
-				Bootstrap</a></li>
+		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
