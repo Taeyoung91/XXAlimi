@@ -28,19 +28,20 @@ public class EnrollController {
 	//등록을 위한 첫 페이지(검색)
 	@RequestMapping("/searchPage")
 	public String addHome(Model model){
-		
 		//검색기능구현예정
-		System.out.println("AddPage");
+		//System.out.println("AddPage");
 		return "add/searchPage";
-//		return "addPage";
 	}
 
 	//검색 결과를 받아 DB에 입력할것임
-	@RequestMapping(value = "/save", method = RequestMethod.GET)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String insertPage(HttpServletRequest request, Model model){
 		
+		String feedUrl = "";
+		model.addAttribute("feedUrl", feedUrl);
 		
-		String feedUrl = (String)request.getParameter("feedUrl");
+		feedUrl = (String)request.getParameter("feedUrl");
+		
 		RSSFeedParser rssFeedParser = new RSSFeedParser(feedUrl,articleDao);
 		Feed feed = rssFeedParser.readFeed();
 		feedDao.save(feed);

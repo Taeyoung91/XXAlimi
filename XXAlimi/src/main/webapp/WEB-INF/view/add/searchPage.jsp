@@ -9,10 +9,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Homepage - XXAlimi ver 0.0.1</title>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script src="/js/feedSearchApi.js" type="text/javascript"></script>
+<script>
+function setModalTitle() {
+	var searchText = document.getElementById("input").value;
+	document.getElementById("searchResultModalTitle").innerHTML = "\"" +searchText + "\"의 검색 결과";
+}
+</script>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/stylish-portfolio.css">
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+<link rel="stylesheet" href="/css/stylish-portfolio.css">
+<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
@@ -30,7 +38,62 @@
 	</div>
 	</header>
 
-	<form action="/add/save" name=insertForm method=get>
+	<div class="row">
+		<div class="col-lg-6">
+			<form method="post" onsubmit="return onSubmit()">
+				<div class="input-group">
+					<input id="input" type="text" class="form-control" placeholder="검색어 입력...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit"
+						data-toggle="modal" data-target="#searchResultModal">Search!</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</form>
+		</div>
+		<!-- /.col-lg-6 -->
+	</div>
+	<!-- /.row -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="searchResultModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="searchResultModalTitle">""의 검색 결과</h4>
+				</div>
+				<div id="feedControl" class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Add RSS Feed!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-6">
+			<form action="/add/save" name=insertForm method="post" >
+				<div class="input-group">
+					<input type="text" id="feedUrl" name=feedUrl class="form-control" placeholder="URL 입력...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Save!</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</form>
+		</div>
+		<!-- /.col-lg-6 -->
+	</div>
+	<!-- /.row -->
+
+	<!-- <form action="/add/save" name=insertForm method=get>
 		<table border=0 width=600 align=center>
 			<tr>
 				<td align=right>URL :</td>
@@ -39,7 +102,7 @@
 			</tr>
 
 		</table>
-	</form>
+	</form> -->
 
 	<footer>
 	<div class="container">
@@ -58,6 +121,13 @@
 		</div>
 	</div>
 	</footer>
+	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
+	<script>
+	$('#searchResultModal').on('shown.bs.modal', function () {
+		setModalTitle();
+	})
+	</script>
 
 </body>
 </html>
