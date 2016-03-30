@@ -51,7 +51,8 @@ dependencies {
 	compile('org.webjars.bower:jquery:2.2.2')
 	compile('org.webjars.bower:bootstrap:3.3.6')
 	compile('javax.servlet:jstl:1.2')
-	compile('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33')
+	providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33')
+	compile('org.jsoup:jsoup:1.8.3')
 }
 
 
