@@ -28,11 +28,8 @@ public class EnrollController {
 	//등록을 위한 첫 페이지(검색)
 	@RequestMapping("/searchPage")
 	public String addHome(Model model){
-		
-		//검색기능구현예정
-		System.out.println("AddPage");
-		return "add/searchPage";
-//		return "addPage";
+
+	return "add/searchPage";
 	}
 
 	//검색 결과를 받아 DB에 입력할것임

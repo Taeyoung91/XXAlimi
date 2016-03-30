@@ -28,6 +28,21 @@ function setModalTitle() {
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- Navigation -->
+	<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i
+		class="fa fa-bars"></i></a>
+	<nav id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		<a id="menu-close" href="#"
+			class="btn btn-light btn-lg pull-right toggle"><i
+			class="fa fa-times"></i></a>
+		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
+		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
+		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
+		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
+		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
+	</ul>
+	</nav>
 	<aside class="callout" style="padding:15px">
 	<div class="text-vertical-center">
 	<h1>RSS Feed 추가하기</h1>
