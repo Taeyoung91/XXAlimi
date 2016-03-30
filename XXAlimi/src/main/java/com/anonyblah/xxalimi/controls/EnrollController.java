@@ -36,25 +36,14 @@ public class EnrollController {
 	}
 
 	//검색 결과를 받아 DB에 입력할것임
-	@RequestMapping(value = "/save", method = RequestMethod.GET)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String insertPage(HttpServletRequest request, Model model){
-		
-		
+
 		String feedUrl = (String)request.getParameter("feedUrl");
-		
-		if(feedUrl != null){
-			RSSFeedParser rssFeedParser = new RSSFeedParser(feedUrl, articleDao);
-			Feed feed = rssFeedParser.readFeed();
-			System.out.println(feed + "!" + articleDao);
-			feedDao.save(feed);
-		}
-		else{
-			
-			
-		}
-		
-		
-		
+
+		RSSFeedParser rssFeedParser = new RSSFeedParser(feedUrl, articleDao);
+		Feed feed = rssFeedParser.readFeed();
+		feedDao.save(feed);
 		return "redirect:/home";
 	}
 //	http://blog.rss.naver.com/naverdev.xml
