@@ -11,8 +11,8 @@
 <title>Homepage - XXAlimi ver 0.0.1</title>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/stylish-portfolio.css">
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+<link rel="stylesheet" href="/css/stylish-portfolio.css">
+<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
