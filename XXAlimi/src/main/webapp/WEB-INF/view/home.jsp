@@ -41,16 +41,15 @@
 
 
 	<c:if test="${feedList[1] == null}">
-		<button id="content" value="&#13;${feedList[0].title}" onclick="notifyMe()">Refresh</button>
+		<button id="content" value="${feedList[0].title}" onclick="notifyMe()">Refresh</button>
 	</c:if>
 	<c:if test="${feedList[1] != null }">
 		<% int i = 0; %>
 		<c:forEach var="feed" items="${feedList}">
 			<% i++; %>
 		</c:forEach>
-		<button id="content" value="&#13;${feedList[0].title} 외 <%= i-1%>개" onclick="notifyMe()">Refresh</button>
+		<button id="content" value="${feedList[0].title} 외 <%= i-1%>개" onclick="notifyMe()">Refresh</button>
 	</c:if>
-	
 	
 
 
