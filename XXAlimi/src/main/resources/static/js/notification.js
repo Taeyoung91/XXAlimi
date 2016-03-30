@@ -3,12 +3,15 @@ function notifyMe() {
 		  if (!"Notification" in window) {
 		    alert("This browser does not support desktop notification");
 		  }
-
+		  
 		  // Let's check if the user is okay to get some notification
 		  else if (Notification.permission === "granted") {
 		    // If it's okay let's create a notification
 			var content = document.getElementById("content").value;
-		    var notification = new Notification("새글 알림 : " + content);
+		    var notification = new Notification("새글 알림 : ", { 
+				body: content,
+				icon: '/img/Team Logo.png' // optional
+			});
 		  }
 
 		  // Otherwise, we need to ask the user for it's permission
