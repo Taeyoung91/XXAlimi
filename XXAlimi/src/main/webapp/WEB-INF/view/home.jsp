@@ -17,6 +17,7 @@
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/js/notification.js"></script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -37,14 +38,22 @@
 	</nav>
 
 	<!-- Header -->
-	<header id="top" class="header">
-	<div class="text-vertical-center">
-		<h1>XXAlimi</h1>
-		<h3>ver 0.0.1 for Team AnonyBlah</h3>
-		<br> <a href="/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
-			RSS</a>
-	</div>
-	</header>
+	<jsp:include page="Header.jsp" />
+
+
+	<c:if test="${feedList[1] == null}">
+		<button id="content" value="&#13;${feedList[0].title}" onclick="notifyMe()">Refresh</button>
+	</c:if>
+	<c:if test="${feedList[1] != null }">
+		<% int i = 0; %>
+		<c:forEach var="feed" items="${feedList}">
+			<% i++; %>
+		</c:forEach>
+		<button id="content" value="&#13;${feedList[0].title} 외 <%= i-1%>개" onclick="notifyMe()">Refresh</button>
+	</c:if>
+	
+	
+
 
 	<div class="container">
 		<div class="row">
@@ -79,26 +88,12 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	<jsp:include page="Tail.jsp" />
 
-	<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-10 col-lg-offset-1 text-center">
-				<h4>
-					<strong>XXAlimi</strong>
-				</h4>
-				<p>
-					ver 0.0.1<br>Team AnonyBlah
-				</p>
-				<hr class="small">
-				<p class="text-muted">Copyright &copy; Hansung Univ. Capstone
-					Design 2016</p>
-			</div>
-		</div>
-	</div>
-	</footer>
-
-
+	
 	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
 	<!-- Custom Theme JavaScript -->

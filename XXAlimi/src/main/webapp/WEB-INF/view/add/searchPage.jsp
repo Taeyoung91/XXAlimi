@@ -21,14 +21,7 @@
 </head>
 <body>
 	<!-- Header -->
-	<header id="top" class="header">
-	<div class="text-vertical-center">
-		<h1>XXAlimi</h1>
-		<h3>ver 0.0.1 for Team AnonyBlah</h3>
-		<br> <a href="/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
-			RSS</a>
-	</div>
-	</header>
+	<jsp:include page="/WEB-INF/view/Header.jsp" />
 
 	<form action="/add/save" name=insertForm method=get>
 		<table border=0 width=600 align=center>
@@ -41,7 +34,7 @@
 		</table>
 	</form>
 
-	<footer>
+	<!-- <footer>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-10 col-lg-offset-1 text-center">
@@ -57,7 +50,9 @@
 			</div>
 		</div>
 	</div>
-	</footer>
+	</footer> -->
+	<jsp:include page="/WEB-INF/view/Tail.jsp" />
+	
 
 </body>
 </html>

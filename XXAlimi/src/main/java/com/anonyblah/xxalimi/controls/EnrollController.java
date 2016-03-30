@@ -1,5 +1,7 @@
 package com.anonyblah.xxalimi.controls;
 
+import java.util.LinkedList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import com.anonyblah.xxalimi.dao.ArticleDao;
 import com.anonyblah.xxalimi.dao.FeedDao;
 import com.anonyblah.xxalimi.rss.RSSFeedParser;
 import com.anonyblah.xxalimi.vo.Feed;
-import com.mysql.fabric.Response;
 
 @Controller
 @RequestMapping("/add")
 public class EnrollController {
-
+	LinkedList <String> enrollUrl = new LinkedList<String>();
 	@Autowired	// Spring에서 자동으로 Set
 	private FeedDao feedDao;
 	
@@ -41,9 +41,18 @@ public class EnrollController {
 		
 		
 		String feedUrl = (String)request.getParameter("feedUrl");
-		RSSFeedParser rssFeedParser = new RSSFeedParser(feedUrl,articleDao);
-		Feed feed = rssFeedParser.readFeed();
-		feedDao.save(feed);
+		
+		if(feedUrl != null){
+			RSSFeedParser rssFeedParser = new RSSFeedParser(feedUrl, articleDao);
+			Feed feed = rssFeedParser.readFeed();
+			System.out.println(feed + "!" + articleDao);
+			feedDao.save(feed);
+		}
+		else{
+			
+			
+		}
+		
 		
 		
 		return "redirect:/home";
