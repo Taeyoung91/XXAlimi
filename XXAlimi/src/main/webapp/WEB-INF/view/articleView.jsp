@@ -46,7 +46,7 @@
 						class="fa fa-cloud fa-stack-1x text-primary"></i>
 					</span>
 					<h3>
-						<strong>${article.description}</strong>
+						<strong>${article.description.value}</strong>
 					</h3>
 					<a class="btn btn-info" href="${article.link}">Go to read!</a>
 				</div>

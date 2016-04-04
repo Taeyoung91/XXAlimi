@@ -61,7 +61,7 @@
 						<a href="/home/feed/${feed.title}">
 							<h2 class="post-title">${feed.title}</h2>
 						</a>
-						<p class="post-meta">updated on ${feed.pubDate}</p>
+						<p class="post-meta">updated on ${feed.publishedDate}</p>
 						<hr class="medium">
 						<div class="row">
 							<c:forEach var="article" items="${feed.entries}" end="2">
@@ -75,7 +75,7 @@
 											<strong>${article.title}</strong>
 										</h3>
 										<h5>posted by ${article.author}</h5>
-										<p>${article.description}</p>
+										<p>${article.description.value}</p>
 										<a class="btn btn-info" href="${article.link}">Go to read!</a>
 									</div>
 								</div>

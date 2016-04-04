@@ -35,7 +35,7 @@
 
 		<h2 class="post-title">${feed.title}</h2>
 
-		<p class="post-meta">updated on ${feed.pubDate}</p>
+		<p class="post-meta">updated on ${feed.publishedDate}</p>
 		<hr class="medium">
 		<div class="row">
 			<c:forEach var="article" items="${feed.entries}">
@@ -46,7 +46,7 @@
 							class="fa fa-cloud fa-stack-1x text-primary"></i>
 						</span>
 						<h3>
-							<a href="/home/article/${article.id}" class="btn btn-dark btn-lg">
+							<a href="/home/article/${article.title}" class="btn btn-dark btn-lg">
 								<strong>${article.title}</strong>
 							</a>
 						</h3>
