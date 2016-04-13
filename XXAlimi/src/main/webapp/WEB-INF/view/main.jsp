@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="/css/stylish-portfolio.css">
 <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
+<link rel="stylesheet" href="/css/bootstrap-social.css">
+<script src="/js/facebookLogin.js" type="text/javascript"></script>
 <title>Welcome to XXAlimi</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
 		<br>
 		<div class="row">
 			<div class="col-xs-4 col-xs-offset-4">
-				<form class="form-signin" method="post">
+				<form name="loginSuccess" action="/login/success" class="form-signin" method="post">
 					<input type="text" class="form-control input-lg" name="username"
 						placeholder="Email Address" required="" autofocus="" />
 					<input type="password" class="form-control input-lg" name="password"
@@ -29,11 +31,17 @@
 						name="rememberMe"> Remember me
 					</label>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Login!</button>
+					<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+					</fb:login-button> -->
 				</form>
+				<br/>
+				<button class="btn btn-lg btn-block btn-social btn-facebook" scope="public_profile,email" onclick="checkLoginState();">
+						<i class="fa fa-facebook"></i> Sign in with Facebook
+				</button>
 				<h4>
 					If you don't have account? <br> Don't worry
 				</h4>
-				<a href="/login/signin" class="btn btn-success btn-lg btn-block">Sign in!</a>
+				<a href="/login/register" class="btn btn-success btn-lg btn-block">Register now!</a>
 			</div>
 		</div>
 	</div>

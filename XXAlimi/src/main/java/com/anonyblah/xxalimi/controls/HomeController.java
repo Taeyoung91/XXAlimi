@@ -53,6 +53,21 @@ public class HomeController {
 
 		return "home";
 	}
+	
+	/**
+	 * MindMapUI (Experimental)
+	 * 
+	 * @param model
+	 *            JSPContext
+	 * @return 표시할 View의 이름
+	 */
+	@RequestMapping("/home/mindmap")
+	public String mindmap(Model model) {
+		List<SyndFeed> feedList = FeedList.feedList;
+		model.addAttribute("feedList", feedList);
+
+		return "mindmap";
+	}
 
 	/**
 	 * Feed를 누르면 그 피드의 Article들을 보여주기 위한 View Method

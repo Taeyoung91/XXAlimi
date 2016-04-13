@@ -40,6 +40,7 @@ function setModalTitle() {
 		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
+		<li><a href="/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>

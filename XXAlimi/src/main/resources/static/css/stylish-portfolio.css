@@ -289,7 +289,26 @@ footer {
     padding: 10px;
 }
 
+.register {
+	display: table;
+	position: relative;
+    width: 100%;
+    height: 100%;
+    color: #000;
+    background: url(../img/callout.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
 li.list-group-item {
     height:auto;
     min-height:175px;
-}}
+}
+
+hr.double-dashed{
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+}
