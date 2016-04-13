@@ -6,19 +6,17 @@ function findFeeds(query) {
 function feedSearchDone(result) {
 	var el = document.getElementById("feedControl");
 	if(result.error || result.entries.length <=0) {
-		el.innerHTML = '<center>No Results Found</center>';
+		el.innerHTML = "<div class=\"alert alert-danger\" role=\"alert\"><center><strong><i class=\"glyphicon glyphicon-exclamation-sign\"></i> Sorry!</strong> No Results Found.</center></div>";
 		return;
 	}
 	var feedControl = new google.feeds.FeedControl();
 	var html="";
 	for(var i=0; i<10; i++) {
 		feedControl.addFeed(result.entries[i].url, result.entries[i].title);
-		html += "<div class=\"media\"><div class=\"media-left\"><img class=\"media-object\" alt=\"No Image\"></div>";
-		html += "<div class=\"media-body\"><h4 class=\"media-heading\">";
-		html += result.entries[i].title;
-		html += "</h4><button class=\"btn btn-success btn-sm\" type=\"button\" value=\"";
-		html += result.entries[i].url;
-		html += "\" onclick=\"setFeedUrl(this.value)\" style=\"float: right;\" data-dismiss=\"modal\">Select!</button></div></div>";
+		html +="<a href=\"#\" id=\"fortest\" data-dismiss=\"modal\" title=\"Click!\" class=\"list-group-item\" onclick=\"setFeedUrl('" + result.entries[i].url + "')\">" +
+				"<img src=\"http://www.google.com/s2/favicons?domain=" + result.entries[i].link + "\" alt=\"Favicon Image\">" +
+				"<h4 class=\"list-group-item-heading\">" + result.entries[i].title +"</h4>" +
+				"<p class=\"list-group-item-text\">" + result.entries[i].contentSnippet + "</p>" + "</a>";
 	}
 	feedControl.setLinkTarget(google.feeds.LINK_TARGET_BLANK);
 	feedControl.setNumEntries(0);
@@ -41,4 +39,6 @@ function inputChange(input) {
 function setFeedUrl(value) {
 	var url = document.getElementById("feedUrl");
 	url.value = value;
+	$("#saveBtn").tooltip('show'); 
+	//$("#saveBtn").button('reset').addClass("btn-success");
 }

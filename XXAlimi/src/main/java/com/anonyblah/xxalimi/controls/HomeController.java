@@ -31,6 +31,15 @@ public class HomeController {
 	// private ArticleDao articleDao;
 
 	/**
+	 * 대문용
+	 * @return 표시할 View의 이름
+	 */
+	@RequestMapping("/")
+	public String main() {
+		return "main";
+	}
+	
+	/**
 	 * Feed목록을 불러와 JSPContext에 담아와 home View에서 FeedList를 사용
 	 * 
 	 * @param model

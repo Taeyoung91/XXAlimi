@@ -14,7 +14,7 @@
 <script>
 function setModalTitle() {
 	var searchText = document.getElementById("input").value;
-	document.getElementById("searchResultModalTitle").innerHTML = "\"" +searchText + "\"의 검색 결과";
+	document.getElementById("searchResultModalTitle").innerHTML = "<i class=\"glyphicon glyphicon-search\"/> \"" +searchText + "\"의 검색 결과";
 }
 </script>
 <link rel="stylesheet"
@@ -39,57 +39,53 @@ function setModalTitle() {
 		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
 		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
-		<li><a href="/keyword/addKeywordView" onclick=$("#menu-close").click(); >Filter</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>
-	<aside class="callout" style="padding:15px">
+	<aside class="searchbg" style="padding:15px">
 	<div class="text-vertical-center">
-		<h1>RSS Feed 추가하기</h1>
-		<p>
-			검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
-		</p>
-		<p>
-			<br />
-		</p>
-		<p>
-		<div class="row">
-			<div class="col-lg-4 col-lg-offset-4">
-				<form method="post" onsubmit="return onSubmit()"
-					class="form-horizontal">
-					<div class="input-group">
-						<input id="input" type="text" class="form-control"
-							placeholder="검색어 입력..."> <span class="input-group-btn">
-							<button class="btn btn-default" type="submit" data-toggle="modal"
-								data-target="#searchResultModal">Search!</button>
-						</span>
-					</div>
-					<!-- /input-group -->
-				</form>
-			</div>
-			<!-- /.col-lg-6 -->
+	<h1>RSS Feed 추가하기</h1>
+	<p>
+		검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
+	</p>
+	<p><br /></p>
+	<p>
+	<div class="row">
+    	<div class="col-sm-6 col-sm-offset-3">
+			<form method="post" onsubmit="return onSubmit()" class="form-horizontal">
+				<div class="input-group">
+					<input id="input" type="text" class="form-control"
+						placeholder="검색어 입력..."> <span class="input-group-btn">
+						<button class="btn btn-default" type="submit" data-toggle="modal"
+							data-toggle="tooltip" data-target="#searchResultModal">Search!</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</form>
 		</div>
-		<!-- /.row -->
-		</p>
-		<p></p>
-		<p>
-		<div class="row">
-			<div class="col-lg-4 col-lg-offset-4">
-				<form action="/add/save" name=insertForm method="post">
-					<div class="input-group">
-						<input type="text" id="feedUrl" name=feedUrl class="form-control"
-							placeholder="URL 입력..."> <span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Save!</button>
-						</span>
-					</div>
-					<!-- /input-group -->
-				</form>
-			</div>
-			<!-- /.col-lg-6 -->
+		<!-- /.col-lg-6 -->
+	</div>
+	<!-- /.row -->
+	</p>
+	<p></p>
+	<p>
+	<div class="row">
+    	<div class="col-sm-6 col-sm-offset-3">
+			<form action="/add/save" name=insertForm method="post">
+				<div class="input-group">
+					<input type="url" id="feedUrl" name=feedUrl class="form-control"
+						placeholder="URL 입력..." required> <span class="input-group-btn">
+						<button id="saveBtn" title="Click this to Save!" class="btn btn-default hover-tooltip" type="submit">Save!</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</form>
 		</div>
-		<!-- /.row -->
-		</p>
+		<!-- /.col-lg-6 -->
+	</div>
+	<!-- /.row -->
+	</p>
 	</div>
 	</aside>
 	<!-- Modal -->
@@ -104,18 +100,10 @@ function setModalTitle() {
 					</button>
 					<h4 class="modal-title" id="searchResultModalTitle">""의 검색 결과</h4>
 				</div>
-				<div id="feedControl" class="modal-body"></div>
+				<div class="modal-body">
+					<div id="feedControl" class="list-group"></div>
+				</div>
 				<div class="modal-footer">
-					<nav>
-					<ul class="pagination">
-						<li class="disabled"><a href="#" aria-label="Previous"><span
-								aria-hidden="true">&laquo;</span></a></li>
-						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<li><a href="#" aria-label="Next"> <span
-								aria-hidden="true">&raquo;</span>
-						</a></li>
-					</ul>
-					</nav>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -131,7 +119,6 @@ function setModalTitle() {
 
 		</table>
 	</form> -->
-	<jsp:include page="/WEB-INF/view/Tail.jsp" />
 	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
 	<script>
