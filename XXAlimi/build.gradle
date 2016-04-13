@@ -37,6 +37,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.projectlombok:lombok:1.16.6')
+	compile('rome:rome:1.0')
+	compile('org.jdom:jdom:2.0.2')
 	compile('org.springframework.boot:spring-boot-starter-mobile')
 	//compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.session:spring-session')

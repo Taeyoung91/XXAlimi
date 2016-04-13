@@ -30,6 +30,16 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Taeyoung/.gradle/caches/modules-2/files-2.1/rome/rome/1.0/22b33347f315833e9348cec2751af1a5d5656e4/rome-1.0.jar" sourcepath="/Users/Taeyoung/.gradle/caches/modules-2/files-2.1/rome/rome/1.0/195e9a962672c32943ec8883e010b6a5ea568745/rome-1.0-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Taeyoung/.gradle/caches/modules-2/files-2.1/org.jdom/jdom/2.0.2/d06c71e0df0ac4b94deb737718580ccce22d92e8/jdom-2.0.2.jar" sourcepath="/Users/Taeyoung/.gradle/caches/modules-2/files-2.1/org.jdom/jdom/2.0.2/2c0614e33230394e42f5cfe55c20d5ae8949c108/jdom-2.0.2-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="/Users/Taeyoung/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-mobile/1.3.3.RELEASE/269ae1c0fbba3a35fd06bf0c5a05bafdb26fd037/spring-boot-starter-mobile-1.3.3.RELEASE.jar" sourcepath="/Users/Taeyoung/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-mobile/1.3.3.RELEASE/15d4d25a3b1d01dd1818685d66f5abe246c02e58/spring-boot-starter-mobile-1.3.3.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
@@ -455,7 +465,5 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Taeyoung/Downloads/jdom-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/Taeyoung/Downloads/rome-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

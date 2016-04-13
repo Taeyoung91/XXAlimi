@@ -39,53 +39,57 @@ function setModalTitle() {
 		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
 		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
+		<li><a href="/keyword/addKeywordView" onclick=$("#menu-close").click(); >Filter</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>
 	<aside class="callout" style="padding:15px">
 	<div class="text-vertical-center">
-	<h1>RSS Feed 추가하기</h1>
-	<p>
-		검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
-	</p>
-	<p><br /></p>
-	<p>
-	<div class="row">
-    	<div class="col-lg-4 col-lg-offset-4">
-			<form method="post" onsubmit="return onSubmit()" class="form-horizontal">
-				<div class="input-group">
-					<input id="input" type="text" class="form-control"
-						placeholder="검색어 입력..."> <span class="input-group-btn">
-						<button class="btn btn-default" type="submit" data-toggle="modal"
-							data-target="#searchResultModal">Search!</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-			</form>
+		<h1>RSS Feed 추가하기</h1>
+		<p>
+			검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
+		</p>
+		<p>
+			<br />
+		</p>
+		<p>
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4">
+				<form method="post" onsubmit="return onSubmit()"
+					class="form-horizontal">
+					<div class="input-group">
+						<input id="input" type="text" class="form-control"
+							placeholder="검색어 입력..."> <span class="input-group-btn">
+							<button class="btn btn-default" type="submit" data-toggle="modal"
+								data-target="#searchResultModal">Search!</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</form>
+			</div>
+			<!-- /.col-lg-6 -->
 		</div>
-		<!-- /.col-lg-6 -->
-	</div>
-	<!-- /.row -->
-	</p>
-	<p></p>
-	<p>
-	<div class="row">
-    	<div class="col-lg-4 col-lg-offset-4">
-			<form action="/add/save" name=insertForm method="post">
-				<div class="input-group">
-					<input type="text" id="feedUrl" name=feedUrl class="form-control"
-						placeholder="URL 입력..."> <span class="input-group-btn">
-						<button class="btn btn-default" type="submit">Save!</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-			</form>
+		<!-- /.row -->
+		</p>
+		<p></p>
+		<p>
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4">
+				<form action="/add/save" name=insertForm method="post">
+					<div class="input-group">
+						<input type="text" id="feedUrl" name=feedUrl class="form-control"
+							placeholder="URL 입력..."> <span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Save!</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</form>
+			</div>
+			<!-- /.col-lg-6 -->
 		</div>
-		<!-- /.col-lg-6 -->
-	</div>
-	<!-- /.row -->
-	</p>
+		<!-- /.row -->
+		</p>
 	</div>
 	</aside>
 	<!-- Modal -->

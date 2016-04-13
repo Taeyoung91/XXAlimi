@@ -31,6 +31,7 @@
 		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
+		<li><a href="/keyword/addKeywordView" onclick=$("#menu-close").click(); >Filter</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
