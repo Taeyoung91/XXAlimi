@@ -11,12 +11,16 @@
 <title>Homepage - XXAlimi ver 0.0.1</title>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/webjars/bootstrap-sweetalert/0.4.5/lib/sweet-alert.css">
 <link rel="stylesheet" href="/css/stylish-portfolio.css">
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
+<script src="/webjars/sockjs-client/1.0.3/dist/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/2.3.4/lib/stomp.min.js"></script>
 <script type="text/javascript" src="/js/notification.js"></script>
 <script type="text/javascript" >
 function equalHeight(group) {    
@@ -28,7 +32,7 @@ function equalHeight(group) {
         }    
     });    
     group.each(function() { $(this).height(tallest); });
-} 
+};
 </script>
 </head>
 <body>
@@ -45,6 +49,7 @@ function equalHeight(group) {
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
 		<li><a href="/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
+		<li><a href="/keyword/addKeywordView" onclick=$("#menu-close").click(); >Keyword</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>
@@ -70,7 +75,7 @@ function equalHeight(group) {
 	</c:if>
 
 	
-
+	<button onclick="notifyMessage("1")">test</button>
 	<div class="container">
 		<div class="row" >
 				<ul class="list-group">
@@ -95,11 +100,10 @@ function equalHeight(group) {
 										<a	href="/home/feed/${feed.title}" class="btn-lg" role="button">
 											<i class="glyphicon glyphicon-new-window"></i>
 										</a>
-								
-										<a href="#" class="btn-lg" role="button">
-											<i class="glyphicon glyphicon-trash"></i>
-										</a>
-							
+										
+										<button class="btn btn-lg btn-warning delete-feed" data-feed-id="${feed.title}">
+											<span class="glyphicon glyphicon-trash"></span>&nbsp;
+										</button>
 							</div>
                 		</li>
                 	</c:forEach>
@@ -139,12 +143,11 @@ function equalHeight(group) {
 			</div>
 		</div>
 	</div> --%>
-	
 
-	
 	<jsp:include page="Tail.jsp" />
 	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
+	<script src="/webjars/bootstrap-sweetalert/0.4.5/lib/sweet-alert.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script>
     // Closes the sidebar menu
@@ -166,8 +169,36 @@ function equalHeight(group) {
     		});       
     	});
     $(document).ready(function() {   
-        equalHeight($(".thumbnail")); 
+        equalHeight($(".thumbnail"));
+        startWebSocket();
     });
+    $('button.delete-feed').click(function() {
+        var feedId = $(this).attr("data-feed-id");
+        deletePhoto(feedId);
+      });
+
+      function deletePhoto(feedId) {
+        swal({
+          title: "Are you sure?", 
+          text: "Are you sure that you want to delete this feed?", 
+          type: "warning",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          confirmButtonText: "Yes, delete it!",
+          confirmButtonColor: "#ec6c62"
+        }, function() {
+          $.ajax({
+            url: "/delete/feed/" + feedId,
+            type: "DELETE"
+          })
+          .done(function(data) {
+            swal("Deleted!", "Your file was successfully deleted!", "success");
+          })
+          .error(function(data) {
+            swal("Oops", "We couldn't connect to the server!", "error");
+          });
+        });
+      }
     // Scrolls to the selected menu item on the page
     /* $(function() {
         $('a[href*=#]:not([href=#])').click(function() {

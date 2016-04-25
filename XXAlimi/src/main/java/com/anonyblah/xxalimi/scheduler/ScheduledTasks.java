@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,9 @@ public class ScheduledTasks {
 	public HashMap<String, String> FilteredKeyword = null;
 	public boolean isFiltered[] = null;
 	public String whereKeyword = null;
+	
+	@Autowired
+	private SimpMessagingTemplate template;
 
 	@Transactional
 	public void scanningFeed() throws IllegalArgumentException, FeedException, IOException {
@@ -111,8 +116,10 @@ public class ScheduledTasks {
 			if (isUpdated) {
 				articleList = scanningFeed.getEntries();
 				int numForUpdatedArticle = articleList.size() - count;
+				this.template.convertAndSend("/topic/message", scanningFeed.getTitle() + " :: " + numForUpdatedArticle + "개의 새 글");
 				System.out
 						.println("[" + dateFormat.format(new Date()) + "]" + scanningFeed.getTitle() + " is Updated!!");
+				
 				for (int i = 0; i < numForUpdatedArticle; i++) {
 					System.out.println(articleList.get(i).getTitle());
 				}

@@ -55,6 +55,10 @@ dependencies {
 	compile('javax.servlet:jstl:1.2')
 	providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.33')
 	compile('org.jsoup:jsoup:1.8.3')
+	compile('org.webjars.bower:bootstrap-sweetalert:0.4.5')
+	compile("org.springframework:spring-messaging")
+	compile('org.webjars.bower:sockjs-client:1.0.3')
+	compile('org.webjars.bower:stomp-websocket:2.3.4')
 }
 
 

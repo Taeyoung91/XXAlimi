@@ -35,9 +35,12 @@
 					</fb:login-button> -->
 				</form>
 				<br/>
-				<button class="btn btn-lg btn-block btn-social btn-facebook" scope="public_profile,email" onclick="checkLoginState();">
+				<button class="btn btn-lg btn-block btn-social btn-facebook" onclick="fb_login();">
 						<i class="fa fa-facebook"></i> Sign in with Facebook
 				</button>
+<!-- 				<fb:login-button class="btn btn-lg btn-block btn-social btn-facebook" scope="public_profile,email" onlogin="checkLoginState();">
+					Sign in with Facebook
+				</fb:login-button> -->
 				<h4>
 					If you don't have account? <br> Don't worry
 				</h4>

@@ -1,3 +1,29 @@
+function startWebSocket() {
+	var socket = new SockJS('/stomp');
+	
+	var stompClient = Stomp.over(socket);
+	
+	stompClient.connect({ }, function(frame) {
+		stompClient.subscribe("/topic/message", function(data) {
+			var message = data.body;
+			notifyMessage(message);
+		});
+	});
+}
+
+function notifyMessage(msg) {
+	if (!"Notification" in window) {
+	    alert("This browser does not support desktop notification");
+	}
+	else if(Notification.permission === "granted") {
+		var content = msg;
+		var notification = new Notification("새글 알림", {
+			body: content,
+			icon: '/img/Team Logo.png'
+		});
+	}
+}
+
 function notifyMe() {
 		  // Let's check if the browser support notifications
 		  if (!"Notification" in window) {
