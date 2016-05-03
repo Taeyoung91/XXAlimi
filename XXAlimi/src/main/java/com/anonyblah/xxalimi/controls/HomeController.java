@@ -1,28 +1,36 @@
 package com.anonyblah.xxalimi.controls;
 
-import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anonyblah.xxalimi.dao.FeedList;
+import com.anonyblah.xxalimi.dao.FeedsDao;
+import com.anonyblah.xxalimi.vo.Feeds;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 
 /**
  * Feed 관리 Controller
  * 
- * @see FeedDao
+ * @see FeedsDao
  * @see ArticleDao
  */
 @Controller
+@RequestMapping("/user")
 public class HomeController {
 
-	// @Autowired // Spring에서 자동으로 Set
-	// private FeedDao feedDao;
+	@Autowired
+	private Feeds feeds;
+	
+//	 @Autowired // Spring에서 자동으로 Set
+//	 private FeedsDao feedDao;
 
 	/**
 	 * @deprecated
@@ -34,10 +42,7 @@ public class HomeController {
 	 * 대문용
 	 * @return 표시할 View의 이름
 	 */
-	@RequestMapping("/")
-	public String main() {
-		return "main";
-	}
+
 	
 	/**
 	 * Feed목록을 불러와 JSPContext에 담아와 home View에서 FeedList를 사용
@@ -45,13 +50,15 @@ public class HomeController {
 	 * @param model
 	 *            JSPContext
 	 * @return 표시할 View의 이름
+	 * @throws Exception 
 	 */
 	@RequestMapping("/home") // "/home"으로 요청이 들어왔을때 이 Method 호출
-	public String home(Model model) {
+	public String home(HttpServletRequest request, Model model) throws Exception {
 		List<SyndFeed> feedList = FeedList.feedList;
-		model.addAttribute("feedList", feedList);
 
-		return "home";
+		model.addAttribute("feedList", feedList/*feedDao.selectList((String)request.getParameter("email"))*/);
+
+		return "/user/home";
 	}
 	
 	/**
@@ -66,7 +73,7 @@ public class HomeController {
 		List<SyndFeed> feedList = FeedList.feedList;
 		model.addAttribute("feedList", feedList);
 
-		return "mindmap";
+		return "/user/mindmap";
 	}
 
 	/**
@@ -91,7 +98,7 @@ public class HomeController {
 
 		model.addAttribute("feed", feed);
 
-		return "feedView";
+		return "/user/feedView";
 	}
 
 	@RequestMapping("/home/article/{title}")
@@ -114,7 +121,7 @@ public class HomeController {
 
 		model.addAttribute("article", article);
 
-		return "articleView";
+		return "/user/articleView";
 	}
 
 	/**
@@ -125,7 +132,7 @@ public class HomeController {
 	@RequestMapping("/home/refreshFeed")
 	public String refreshFeed() {
 		
-		return "redirect:/home";
+		return "redirect:/user/home";
 	}
 	
 

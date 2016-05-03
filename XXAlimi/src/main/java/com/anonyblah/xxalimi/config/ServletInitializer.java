@@ -1,7 +1,9 @@
-package com.anonyblah.xxalimi;
+package com.anonyblah.xxalimi.config;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+
+import com.anonyblah.xxalimi.XxAlimiApplication;
 
 public class ServletInitializer extends SpringBootServletInitializer {
 

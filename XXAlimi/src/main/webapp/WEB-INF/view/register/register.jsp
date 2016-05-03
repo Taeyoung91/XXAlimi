@@ -18,7 +18,7 @@
 			<div class="col-xs-6 col-xs-offset-3">
 				<div class="well"><h1><Strong>Register</Strong></h1>
 				<hr class="double-dashed">
-				<form class="form-horizontal" action="" method="POST">
+				<form class="form-horizontal" action="/register" method="POST">
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label" for="username">Username</label>
@@ -63,7 +63,7 @@
 						<div class="control-group">
 							<!-- Button -->
 							<div class="controls">
-								<button class="btn btn-success">Register</button>
+								<button class="btn btn-success" type="submit">Register</button>
 							</div>
 						</div>
 					</fieldset>

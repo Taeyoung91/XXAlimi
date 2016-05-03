@@ -50,7 +50,13 @@ function setModalTitle() {
 	<p>
 		검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
 	</p>
-	<p><br /></p>
+	<p>
+		USER ID : ${ pageContext.request.userPrincipal.name}
+	</br>
+	<a href="${pageContext.request.contextPath}/logout">LOGOUT</a>
+	
+	</br>
+	<br /></p>
 	<p>
 	<div class="row">
     	<div class="col-sm-6 col-sm-offset-3">
@@ -78,6 +84,7 @@ function setModalTitle() {
 					<input type="url" id="feedUrl" name=feedUrl class="form-control"
 						placeholder="URL 입력..." required> <span class="input-group-btn">
 						<button id="saveBtn" title="Click this to Save!" class="btn btn-default hover-tooltip" type="submit">Save!</button>
+						<input type="text" id="email" name="email" value="${ pageContext.request.userPrincipal.name}">
 					</span>
 				</div>
 				<!-- /input-group -->

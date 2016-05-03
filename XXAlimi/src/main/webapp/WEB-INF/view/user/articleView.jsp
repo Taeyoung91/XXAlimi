@@ -25,7 +25,7 @@
 	<div class="text-vertical-center">
 		<h1>XXAlimi</h1>
 		<h3>ver 0.0.1 for Team AnonyBlah</h3>
-		<br> <a href="/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
+		<br> <a href="/user/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
 			RSS</a>
 	</div>
 	</header>

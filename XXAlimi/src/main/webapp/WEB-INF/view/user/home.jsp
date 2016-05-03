@@ -14,7 +14,7 @@
 <link rel="stylesheet"
 	href="/webjars/bootstrap-sweetalert/0.4.5/lib/sweet-alert.css">
 <link rel="stylesheet" href="/css/stylish-portfolio.css">
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
@@ -22,7 +22,7 @@
 <script src="/webjars/sockjs-client/1.0.3/dist/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.4/lib/stomp.min.js"></script>
 <script type="text/javascript" src="/js/notification.js"></script>
-<script type="text/javascript" >
+<script type="text/javascript">
 function equalHeight(group) {    
     tallest = 0;    
     group.each(function() {       
@@ -44,105 +44,68 @@ function equalHeight(group) {
 		<a id="menu-close" href="#"
 			class="btn btn-light btn-lg pull-right toggle"><i
 			class="fa fa-times"></i></a>
-		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
-		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
+		<li class="sidebar-brand"><a href="/login" onclick=$("#menu-close").click(); >XXAlimi</a></li>
+		<li><a href="/user/home" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
-		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
-		<li><a href="/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
+		<li><a href="/user/#top" onclick=$("#menu-close").click(); >Recommand</a></li>
+		<li><a href="/user/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
 		<li><a href="/keyword/addKeywordView" onclick=$("#menu-close").click(); >Keyword</a></li>
-		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
+		<li><a href="/user/#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>
 
 	<aside class="homebg">
-		<div class="text-vertical-left">
-			<h1>My Feeds</h1>
-			<p>
-				개의 읽지 않은 글들이 있습니다.
-			</p>
-		</div>
+	<div class="text-vertical-left">
+		<h1>My Feeds</h1>
+		<p>개의 읽지 않은 글들이 있습니다.</p>
+	</div>
 	</aside>
 
-	<c:if test="${feedList[1] == null}">
-		<button id="content" value="${feedList[0].title}" onclick="notifyMe()">Refresh</button>
-	</c:if>
-	<c:if test="${feedList[1] != null }">
-		<% int i = 0; %>
-		<c:forEach var="feed" items="${feedList}">
-			<% i++; %>
-		</c:forEach>
-		<button id="content" value="${feedList[0].title} 외 <%= i-1%>개" onclick="notifyMe()">Refresh</button>
-	</c:if>
+	USER ID : ${ pageContext.request.userPrincipal.name}
+	</br>
+	<a href="${pageContext.request.contextPath}/logout">LOGOUT</a>
+	<input type="hidden" id="email" name="email" value="${ pageContext.request.userPrincipal.name}">
+	</br>
 
-	
-	<button onclick="notifyMessage("1")">test</button>
+
 	<div class="container">
-		<div class="row" >
-				<ul class="list-group">
-					<c:forEach var="feed" items="${feedList}">
-						<li class="list-group-item">
-							<div class="media col-sm-2">
-                    			<figure class="pull-left">
-                       				<img class="media-object img-rounded img-responsive"  src="${feed.image.url}" alt="Feed Site Image">
-                    			</figure>
-                			</div>
-                			<div class="col-sm-9">
-                    			<h3 class="list-group-item-heading"><strong>${feed.title}</strong></h3>
-                    			<hr/>
-                    			<ul>
-									<c:forEach var="article" items="${feed.entries}" end="2">
-										<li><a href="${article.link}">${article.title}</a></li>
-									</c:forEach>
-								</ul>
-							</div>
-							<div class="col-sm-1">
-								
-										<a	href="/home/feed/${feed.title}" class="btn-lg" role="button">
-											<i class="glyphicon glyphicon-new-window"></i>
-										</a>
-										
-										<button class="btn btn-lg btn-warning delete-feed" data-feed-id="${feed.title}">
-											<span class="glyphicon glyphicon-trash"></span>&nbsp;
-										</button>
-							</div>
-                		</li>
-                	</c:forEach>
-                </ul>
+		<div class="row">
+			<ul class="list-group">
+				<c:forEach var="feed" items="${feedList}">
+					<li class="list-group-item">
+						<div class="media col-sm-2">
+							<figure class="pull-left"> <img
+								class="media-object img-rounded img-responsive"
+								src="${feed.image.url}" alt="Feed Site Image"> </figure>
+						</div>
+						<div class="col-sm-9">
+							<h3 class="list-group-item-heading">
+								<strong>${feed.title}</strong>
+							</h3>
+							<hr />
+							<ul>
+								<c:forEach var="article" items="${feed.entries}" end="2">
+									<li><a href="${article.link}">${article.title}</a></li>
+								</c:forEach>
+							</ul>
+						</div>
+						<div class="col-sm-1">
+
+							<a href="/user/home/feed/${feed.title}" class="btn-lg" role="button">
+								<i class="glyphicon glyphicon-new-window"></i>
+							</a>
+
+							<button class="btn btn-lg btn-warning delete-feed"
+								data-feed-id="${feed.title}">
+								<span class="glyphicon glyphicon-trash"></span>&nbsp;
+							</button>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
 
 		</div>
 	</div>
-
-	<%-- <div class="container">
-		<div class="row">
-			<div class="col-lg-10 col-lg-offset-1 text-center">
-				<ul class="media-list">
-					<c:forEach var="feed" items="${feedList}">
-						<li class="media">
-						<div class="media-left">
-							<img id="extImg" class="media-object" src="${feed.image.url}" alt="Feed Image">
-						</div>
-						<div class="media-body">
-							<a href="/home/feed/${feed.title}">
-							<h4 class="post-title">${feed.title}</h4>
-							</a>
-							<p class="post-meta">updated on ${feed.publishedDate}</p>
-							<c:forEach var="article" items="${feed.entries}" end="2">
-								<div class="media">
-<!-- 									<img id="extImg" class="media-object" src="/img/Team Logo.png" alt="Article Image"> -->
-									<div class="media-body">
-										<h3>${article.title}</h3>
-										<h5>posted by ${article.author}</h5>
-										<p class="limit" id="description">${article.description.value}</p>
-										<a class="btn btn-info" href="${article.link}">Go to read!</a>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
-	</div> --%>
 
 	<jsp:include page="Tail.jsp" />
 	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>

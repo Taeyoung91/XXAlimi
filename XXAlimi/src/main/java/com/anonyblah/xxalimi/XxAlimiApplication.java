@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication
+@SpringBootApplication/*(exclude=DispatcherServletAutoConfiguration.class)*/
 @EnableScheduling
 @ImportResource("tasks.xml")
 public class XxAlimiApplication {

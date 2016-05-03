@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 동적 SQL 적용 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anonyblah.xxalimi.dao.UserDao">
+	<resultMap type="user" id="userResultMap">
+		<id column="user_num" property="no" />
+		<result column="name" property="name" />
+		<result column="user_email" property="email" />
+		<result column="password" property="password" />
+		<result column="cre_date" property="createdDate" javaType="java.sql.Date" />
+	</resultMap>
+
+	<insert id="insert" parameterType="string">
+		insert into users(user_email, password, name, cre_date)
+		values (#{email}, #{password}, #{name}, now())
+	</insert>
+
+</mapper>

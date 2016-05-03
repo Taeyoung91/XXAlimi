@@ -1,28 +1,28 @@
 package com.anonyblah.xxalimi.vo;
 
-import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import java.sql.Date;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@Component
 public class User {
 	
-	@Id
-	@Size(min = 5, max=100)
-	String email;
+//	@Id
+	protected int no;
 	
-	int index;
+//	@Size(min = 5, max=100)
+	protected String email;
 	
-	@Size(min = 1, max=100)
-	String name;
+//	@Size(min = 1, max=100)
+	protected String name;
 	
-	@Size(min = 8, max=1000)
-	String password;
+//	@Size(min = 8, max=1000)
+	protected String password;
 	
-	
-	String latestTime;
-	
+	protected Date createdDate;
 }

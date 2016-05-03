@@ -17,7 +17,7 @@ function notifyMessage(msg) {
 	}
 	else if(Notification.permission === "granted") {
 		var content = msg;
-		var notification = new Notification("새글 알림", {
+		var notification = new Notification("XXAlimi", {
 			body: content,
 			icon: '/img/Team Logo.png'
 		});

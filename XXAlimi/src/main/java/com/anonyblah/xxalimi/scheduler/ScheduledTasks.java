@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.anonyblah.xxalimi.dao.FeedList;
 import com.anonyblah.xxalimi.dao.KeywordList;
 import com.anonyblah.xxalimi.rss.RSSFeedParser;
-import com.anonyblah.xxalimi.vo.Article;
 import com.anonyblah.xxalimi.vo.Keyword;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -78,9 +77,9 @@ public class ScheduledTasks {
 
 				RSSFeedParser parser = ParserList.parserList.get(i);
 
-				if (parser.getFeedLink().equals(scanningFeed.getLink())) {
+				if (parser.getFeed().getLink().equals(scanningFeed.getLink())) {
 
-					scanningFeed = parser.readFeed();
+					scanningFeed = parser.getFeed();
 					for (int j = 0; j < allFeed.size(); j++) {
 						if (allFeed.get(j).getLink().equals(scanningFeed.getLink())) {
 							allFeed.set(j, scanningFeed);
@@ -116,7 +115,14 @@ public class ScheduledTasks {
 			if (isUpdated) {
 				articleList = scanningFeed.getEntries();
 				int numForUpdatedArticle = articleList.size() - count;
-				this.template.convertAndSend("/topic/message", scanningFeed.getTitle() + " :: " + numForUpdatedArticle + "개의 새 글");
+				if(numForUpdatedArticle == 1){
+					this.template.convertAndSend("/topic/message", scanningFeed.getTitle() + "\n" + articleList.get(0).getTitle());
+				}
+				else{
+					this.template.convertAndSend("/topic/message", scanningFeed.getTitle() + "\n" + articleList.get(0).getTitle() 
+							+ " 외 " + numForUpdatedArticle + "개의 새 글");
+				}
+				
 				System.out
 						.println("[" + dateFormat.format(new Date()) + "]" + scanningFeed.getTitle() + " is Updated!!");
 				
