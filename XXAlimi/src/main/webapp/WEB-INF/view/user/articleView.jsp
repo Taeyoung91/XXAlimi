@@ -33,9 +33,9 @@
 
 	<div class="feedView">
 
-		<h2 class="post-title">${article.title}</h2>
+		<h2 class="post-title">${articleList.articleTitle}</h2>
 
-		<p class="post-meta">posted by ${article.author}</p>
+		<p class="post-meta">posted by ${articleList.articleAuthority}</p>
 		<hr class="medium">
 		<div class="row">
 
@@ -46,9 +46,9 @@
 						class="fa fa-cloud fa-stack-1x text-primary"></i>
 					</span>
 					<h3>
-						<strong>${article.description.value}</strong>
+						<strong>${articleList.content}</strong>
 					</h3>
-					<a class="btn btn-info" href="${article.link}">Go to read!</a>
+					<a class="btn btn-info" href="${articleList.articleLink}">Go to read!</a>
 				</div>
 			</div>
 

@@ -33,12 +33,12 @@
 
 	<div class="feedView">
 
-		<h2 class="post-title">${feed.title}</h2>
+		<h2 class="post-title">${title}</h2>
 
-		<p class="post-meta">updated on ${feed.publishedDate}</p>
+		<p class="post-meta">updated on ${pubDate}</p>
 		<hr class="medium">
 		<div class="row">
-			<c:forEach var="article" items="${feed.entries}">
+			<c:forEach var="article" items="${articleList}">
 				<div class="col-md-4 col-sm-4 text-center">
 					<div class="servies-item">
 						<span class="fa-stack fa-4x"> <i
@@ -46,11 +46,16 @@
 							class="fa fa-cloud fa-stack-1x text-primary"></i>
 						</span>
 						<h3>
-							<a href="/home/article/${article.title}" class="btn btn-dark btn-lg">
-								<strong>${article.title}</strong>
+							<a href="${article.articleLink}" class="btn btn-dark btn-lg">
+								<strong>${article.articleTitle}</strong>
 							</a>
 						</h3>
-						<h5>posted by ${article.author}</h5>
+						<c:if test="${article.articleAuthority != null }">
+							<h5>posted by ${article.articleAuthority}</h5>
+						</c:if>
+						<c:if test="${article.publishedDate != null }">
+							<h5>updated by ${article.publishedDate}</h5>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>

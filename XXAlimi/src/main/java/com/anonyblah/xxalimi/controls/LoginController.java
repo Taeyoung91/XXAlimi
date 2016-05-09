@@ -1,17 +1,17 @@
 package com.anonyblah.xxalimi.controls;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.anonyblah.xxalimi.vo.Feeds;
+import com.anonyblah.xxalimi.vo.User;
 
 
 @Controller
 public class LoginController {
 	
-	@Autowired
-	Feeds feeds;
 	
 	@RequestMapping("/login")
 	public void login() {
@@ -23,10 +23,14 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/user/success")
-	public String loginSuccess(/*HttpServletRequest request, Model model*/){
-		
-//		System.out.println(request.getAttribute("name"));
-		return "redirect:/user/home";
+	public String loginSuccess(HttpServletRequest request /*Model model*/) throws Exception{
+			
+		return "/user/home";
+	}
+	
+	@RequestMapping("/logout")
+	public void logout() {
+		System.out.println("logout");
 	}
 	
 //	@RequestMapping("/fail")

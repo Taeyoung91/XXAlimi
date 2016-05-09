@@ -9,7 +9,7 @@ import com.anonyblah.xxalimi.vo.User;
 public interface UserDao {
 	@Insert("insert into users(username, password, name, cre_date, enabled)" + 
 			"values (#{email}, #{password}, #{name}, now(), 1)")
-	/*int*/void insert(User user) throws Exception;
+	void insert(User user) throws Exception;
 
 	int delete(int no) throws Exception;
 }

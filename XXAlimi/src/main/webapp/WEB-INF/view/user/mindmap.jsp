@@ -29,8 +29,8 @@
 				<c:forEach var="feed" items="${feedList}">
 					<li><a href="#">${feed.title}</a>
 						<ul>
-							<c:forEach var="article" items="${feed.entries}" end="4">
-								<li><a href="${article.link}">${article.title}</a></li>>
+							<c:forEach var="article" items="${articleList}" end="4">
+								<li><a href="${article.articleLink}">${article.articleTitle}</a></li>>
 							</c:forEach>
 						</ul>
 					</li>

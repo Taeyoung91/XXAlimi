@@ -64,7 +64,6 @@ function equalHeight(group) {
 	USER ID : ${ pageContext.request.userPrincipal.name}
 	</br>
 	<a href="${pageContext.request.contextPath}/logout">LOGOUT</a>
-	<input type="hidden" id="email" name="email" value="${ pageContext.request.userPrincipal.name}">
 	</br>
 
 
@@ -72,11 +71,14 @@ function equalHeight(group) {
 		<div class="row">
 			<ul class="list-group">
 				<c:forEach var="feed" items="${feedList}">
+					<%-- <input type="hidden" id="title" value="${feedList.title}"> --%>
+					<%-- <input type="hidden" id="feedPubDate" value="${feedList.publishedDate}"> --%>
 					<li class="list-group-item">
 						<div class="media col-sm-2">
 							<figure class="pull-left"> <img
 								class="media-object img-rounded img-responsive"
-								src="${feed.image.url}" alt="Feed Site Image"> </figure>
+								src="${feed.imageUrl}" alt=""> </figure>
+
 						</div>
 						<div class="col-sm-9">
 							<h3 class="list-group-item-heading">
@@ -84,15 +86,25 @@ function equalHeight(group) {
 							</h3>
 							<hr />
 							<ul>
-								<c:forEach var="article" items="${feed.entries}" end="2">
-									<li><a href="${article.link}">${article.title}</a></li>
+								<c:set var="i" value="0" />
+								<c:set var="doneLoop" value="false" />
+								<c:forEach var="article" items="${articleList}"
+									varStatus="status">
+									<c:if test="${not doneLoop}">
+										<c:if test="${feed.link == article.feedLink}">
+											<c:set var="i" value="${i + 1}" />
+											<li><a href="${article.articleLink}">${article.articleTitle}</a></li>
+											<c:if test="${i == 3}">
+												<c:set var="doneLoop" value="true" />
+											</c:if>
+										</c:if>
+									</c:if>
 								</c:forEach>
 							</ul>
 						</div>
 						<div class="col-sm-1">
-
-							<a href="/user/home/feed/${feed.title}" class="btn-lg" role="button">
-								<i class="glyphicon glyphicon-new-window"></i>
+							<a href="/user/home/feed/${feed.title}" class="btn-lg"
+								role="button"> <i class="glyphicon glyphicon-new-window"></i>
 							</a>
 
 							<button class="btn btn-lg btn-warning delete-feed"

@@ -15,11 +15,14 @@
 				name="addKeyword">
 
 				<h2>${feed.title}</h2>
+				<input type="hidden" id="feedLink" name="feedLink" value="${feed.link}">
+				<input type="hidden" id="feedtitle" name="feedtitle" value="${feed.title}">
 				<c:if test="true"/>
 				<c:forEach var="keyword" items="${keywordList}">
-
 					<c:if test="${feed.title == keyword.title}">
 						<h3>${keyword.keyword}</h3>
+						<%-- <input type="text" id="feedtitle" name="feedtitle" value="${feed.title}"> --%>
+						
 					</c:if>
 				</c:forEach>
 				<input type="text" id="keyword" name="keyword">

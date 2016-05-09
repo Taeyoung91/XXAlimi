@@ -31,6 +31,8 @@ public class Feeds {
 
 	protected String link;
 	
+	protected String usersfeedTitle;
+	
 	protected String title;
 	
 	protected String author;
@@ -42,7 +44,6 @@ public class Feeds {
 	protected String language;
 	
 	protected String publishedDate;
-	
 	
 	protected Date createdDate;
 	

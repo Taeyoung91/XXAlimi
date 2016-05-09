@@ -37,10 +37,10 @@ function setModalTitle() {
 			class="btn btn-light btn-lg pull-right toggle"><i
 			class="fa fa-times"></i></a>
 		<li class="sidebar-brand"><a href="#top" onclick=$("#menu-close").click(); >XXAlimi</a></li>
-		<li><a href="/home" onclick=$("#menu-close").click(); >Home</a></li>
+		<li><a href="/user/home" onclick=$("#menu-close").click(); >Home</a></li>
 		<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Recommand</a></li>
-		<li><a href="/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
+		<li><a href="/user/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
 		<li><a href="#top" onclick=$("#menu-close").click(); >Setting</a></li>
 	</ul>
 	</nav>
@@ -84,7 +84,7 @@ function setModalTitle() {
 					<input type="url" id="feedUrl" name=feedUrl class="form-control"
 						placeholder="URL 입력..." required> <span class="input-group-btn">
 						<button id="saveBtn" title="Click this to Save!" class="btn btn-default hover-tooltip" type="submit">Save!</button>
-						<input type="text" id="email" name="email" value="${ pageContext.request.userPrincipal.name}">
+						<input type="hidden" id="email" name="email" value="${ pageContext.request.userPrincipal.name}">
 					</span>
 				</div>
 				<!-- /input-group -->
