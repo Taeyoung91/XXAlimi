@@ -3,7 +3,6 @@ package com.anonyblah.xxalimi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.anonyblah.xxalimi.dao.KeywordDao;
@@ -31,6 +30,10 @@ public class KeywordService {
 	
 	public List<Keywords> OutputKeyword() throws Exception{
 		return keywordDao.findTitleAndKeywordByEmail(loginService.getID());
+	}
+	
+	public List<Keywords> OutputKeywordByLink(String feedLink) throws Exception{
+		return keywordDao.findKeywordByEmailAndFeedLink(loginService.getID(), feedLink);
 	}
 	
 	public void deleteKeyword(String feedUrl) throws Exception{

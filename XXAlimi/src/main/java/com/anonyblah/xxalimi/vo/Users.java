@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Component
-public class User {
+public class Users {
 	
 //	@Id
 	protected int no;
@@ -23,6 +23,8 @@ public class User {
 	
 //	@Size(min = 8, max=1000)
 	protected String password;
+	
+	protected String role;
 	
 	protected Date createdDate;
 }

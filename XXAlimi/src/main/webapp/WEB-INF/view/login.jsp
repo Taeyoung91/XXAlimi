@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,28 +14,17 @@
 	type="text/css">
 <link rel="stylesheet" href="/css/bootstrap-social.css">
 <script src="/js/facebookLogin.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/notification.js"></script>
 <title>Welcome to XXAlimi</title>
 </head>
 <body>
-	<c:if test="${ not empty pageContext.request.userPrincipal }">
+	<sec:authorize access="isAuthenticated()">
 		<!-- Navigation -->
-		<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i
-			class="fa fa-bars"></i></a>
-		<nav id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<a id="menu-close" href="#"
-				class="btn btn-light btn-lg pull-right toggle"><i
-				class="fa fa-times"></i></a>
-			<li class="sidebar-brand"><a href="/login" onclick=$("#menu-close").click(); >XXAlimi</a></li>
-			<li><a href="/user/home" onclick=$("#menu-close").click(); >Home</a></li>
-			<li><a href="/add/searchPage" onclick=$("#menu-close").click(); >Add+</a></li>
-			<li><a href="/user/#top" onclick=$("#menu-close").click(); >Recommand</a></li>
-			<li><a href="/user/home/mindmap" onclick=$("#menu-close").click(); >MindMapUI<strong>(Experimental)</strong></a></li>
-			<li><a href="/keyword/addKeywordView" onclick=$("#menu-close").click(); >Keyword</a></li>
-			<li><a href="/user/#top" onclick=$("#menu-close").click(); >Setting</a></li>
-		</ul>
-		</nav>
-	</c:if>
+		<%@include file="/WEB-INF/view/MenuBar.jsp"%>
+	</sec:authorize>
+
+	<%-- <c:if test="${ not empty pageContext.request.userPrincipal }"></c:if> --%>
+
 	<!-- Header -->
 	<header id="top" class="header">
 
@@ -44,26 +35,30 @@
 
 		<div class="row">
 			<div class="col-xs-4 col-xs-offset-4">
-				<c:if test="${ empty pageContext.request.userPrincipal }">
-					<form name="loginSuccess" action="/user/home" class="form-signin"
+				
+				<c:url value="/login" var="loginUrl" />
+				<sec:authorize access="isAnonymous()">
+					
+
+
+
+					<form name="loginSuccess" action="/login" class="form-signin"
 						method="post">
 
 						<c:if test="${param.error != null}">
-							<p>
+							<font color="red"">
 								Login ERROR!</br>
 								<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != NULL}">
 								MESSAGE: <c:out
 										value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
 								</c:if>
-							</p>
+							</font>
+														
 						</c:if>
-						<input type="text" class="form-control input-lg" id="username"
-							name="username" placeholder="Email Address" required=""
-							autofocus="" /> <input type="password"
-							class="form-control input-lg" name="password"
-							placeholder="Password" required="" /> <label class="checkbox">
-							<input type="checkbox" value="remember-me" id="rememberMe"
-							name="rememberMe"> Remember me
+						<input type="text" class="form-control input-lg" id="username" name="username" placeholder="Email Address" required=""
+							autofocus="" /> 
+						<input type="password" class="form-control input-lg" name="password" placeholder="Password" required="" /> <label class="checkbox">
+						<input type="checkbox" name="remember-me" value="true" checked="checked"> Remember me
 						</label>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Login!</button>
 						<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
@@ -71,42 +66,44 @@
 					</form>
 					<br />
 					<form action="/register" method="get">
-						<button class="btn btn-lg btn-block btn-social btn-facebook"
+						<!-- <button class="btn btn-lg btn-block btn-social btn-facebook"
 							onclick="fb_login();">
 							<i class="fa fa-facebook"></i> Sign in with Facebook
-						</button>
+						</button> -->
 						<!-- 				<fb:login-button class="btn btn-lg btn-block btn-social btn-facebook" scope="public_profile,email" onlogin="checkLoginState();">
 					Sign in with Facebook
 				</fb:login-button> -->
 						<h4>
 							If you don't have account? <br> Don't worry
 						</h4>
-						<a href="/register" class="btn btn-success btn-lg btn-block">Register
+						<a href="/register/form" class="btn btn-success btn-lg btn-block">Register
 							now!</a>
 					</form>
-				</c:if>
-				<c:if test="${ not empty pageContext.request.userPrincipal }">
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					Hello! ${ pageContext.request.userPrincipal.name} </br>
-					<a href="${pageContext.request.contextPath}/logout">LOGOUT</a>
+					<a href="${pageContext.request.contextPath}/logout"><h3>LOGOUT</h3></a>
 					</br>
-				</c:if>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
 	</header>
+	<jsp:include page="/WEB-INF/view/user/Tail.jsp" />
 	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
 	<script>
-	// Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
+		// Closes the sidebar menu
+		$("#menu-close").click(function(e) {
+			e.preventDefault();
+			$("#sidebar-wrapper").toggleClass("active");
+		});
+		// Opens the sidebar menu
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#sidebar-wrapper").toggleClass("active");
+		});
 	</script>
+
 </body>
 </html>

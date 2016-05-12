@@ -7,12 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.anonyblah.xxalimi.dao.ArticlesDao;
-import com.anonyblah.xxalimi.dao.FeedsDao;
 import com.anonyblah.xxalimi.service.EnrollService;
-import com.anonyblah.xxalimi.vo.Articles;
-//import com.anonyblah.xxalimi.vo.Article;
-import com.anonyblah.xxalimi.vo.Feeds;
 
 
 @Controller
@@ -26,7 +21,7 @@ public class EnrollController {
 	
 	//등록을 위한 첫 페이지(검색)
 	@RequestMapping("/searchPage")
-	public String addcControl(Model model){
+	public String addControl(Model model){
 		
 		//검색기능구현예정		
 		return "add/searchPage";
@@ -34,11 +29,11 @@ public class EnrollController {
 
 	//검색 결과를 받아 DB에 입력할것임
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String insertPage(@RequestParam String feedUrl, @RequestParam String email) throws Exception{
+	public String insertPage(@RequestParam String feedUrl) throws Exception{
 		
-		enrollService.enrollFeed(feedUrl, email);
+		enrollService.enrollFeed(feedUrl);
 		
-		return "redirect:/user/home";
+		return "redirect:/home";
 	}
 	
 //  http://newssearch.naver.com/search.naver?where=rss&query=iPhone&rcdate=1&rcdate_ds=1997-1-1&rcdate_de=2007-01-25&srchm=qd&cat=all&pd=1

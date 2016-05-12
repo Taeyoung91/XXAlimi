@@ -1,10 +1,7 @@
 package com.anonyblah.xxalimi.scheduler;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -14,114 +11,93 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.anonyblah.xxalimi.dao.ArticlesDao;
-import com.anonyblah.xxalimi.dao.FeedsDao;
-import com.anonyblah.xxalimi.dao.KeywordDao;
 import com.anonyblah.xxalimi.rss.RSSFeedParser;
+import com.anonyblah.xxalimi.service.ArticleService;
+import com.anonyblah.xxalimi.service.FeedService;
+import com.anonyblah.xxalimi.service.KeywordService;
+import com.anonyblah.xxalimi.service.LoginService;
 import com.anonyblah.xxalimi.vo.Articles;
 import com.anonyblah.xxalimi.vo.Feeds;
 import com.anonyblah.xxalimi.vo.Keywords;
-import com.anonyblah.xxalimi.vo.User;
-import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 
 @Component("ScanningFeed")
 public class ScheduledTasks {
 
-	@Autowired
-	private Keywords keywords;
 
-	@Autowired
-	private KeywordDao keywordDao;
 
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd E HH:mm:ss");
+	
+	
+	@Autowired
+	FeedService feedService;
+	
+	@Autowired
+	LoginService loginService;
+	
+	@Autowired
+	ArticleService articleService;
+	
+	@Autowired
+	KeywordService keywordService;
+	
 	@Autowired // Spring에서 자동으로 Set
 	private ArticlesDao articleDao;
-	//
-	@Autowired
-	private FeedsDao feedsDao;
 
 	@Autowired
 	private Articles articles;
 
-	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 
 	@Autowired
-	User user;
-
-	@Autowired
-	private SimpMessagingTemplate template;
+	private SimpMessagingTemplate template;			//	웹 소켓방식으로 업데이트된 내용을 클라이언트로 보내기 위해 사용되는 객체
 
 	@Transactional
 	public void scanningFeed() throws Exception {
 		System.out.println(
 				"scanningFeed() 실행==============================================================================\n\n");
 
-		if (user.getEmail() != null) {
+		if (loginService.getID() != null) {							// 현재 로그인 된 상태 일 때
 
-			List<Feeds> allFeed = feedsDao.findFeedUrlAndTitleByEmail(user.getEmail());
+			List<Feeds> allFeed = feedService.outputFeed();			// 저장된 피드 전체 DB에서 불러오기
 
 			System.out.println("allFeed : " + allFeed.size());
 
-			for (int index = 0; index < allFeed.size(); index++) {
-				System.out.println("index : " + index);
+			for (int index = 0; index < allFeed.size(); index++) {		// 저장된 각 피드 별로 파싱 진행
 
-				List<Articles> articleList = articleDao.findArticlesByEmailAndFeedUrl(allFeed.get(index).getLink(),
-						user.getEmail());
+				String updatedArticleTitle = null;
 
-				String updateArticleTitle = null;
-
-				boolean isUpdated;
+				boolean isUpdated = false;
+				
+				int count = 0;
+				
+				List<Articles> articleList 
+				= articleService.outputArticlesByLink(allFeed.get(index).getLink());	//	각 피드에 딸린 기사 전체 DB에서 불러오기
 
 				System.out.println("---------Update Logic---------");
-				isUpdated = false;
 
-				int count = 0;
-				int notkeywordcount = 0;
 
 				Hibernate.initialize(articleList);
 
-				RSSFeedParser parser = new RSSFeedParser(allFeed.get(index).getLink());
+				RSSFeedParser parser = new RSSFeedParser(allFeed.get(index).getLink());	// 파싱 진행
 				parser.readFeed();
 				SyndFeed syndFeed = parser.getFeed();
 
 				System.out.println(articleList.get(0).getArticleTitle() + " articleList.size : " + articleList.size());
-				for (int j = 0; j < parser.getArticleEntries().size(); j++) {
+				
+				for (int j = 0; j < parser.getArticleEntries().size(); j++) {	// 새로 파싱한 모든 기사 하나씩 keyword 조사
 					System.out.println("index.j : " + index + ", " + j);
-					if (articleList.get(0).getArticleLink().equals(parser.getArticleEntries().get(j).getLink())) { // update된
-																													// 새
-																													// 피드의
-																													// 기사와
-																													// 기존
-																													// DB에
-																													// 저장된
-																													// 해당
-																													// 피드의첫기사
-																													// 링크를
-																													// 비교하여
-																													// 같으면
-																													// not
-																													// updated
-						System.out
-								.println("articleList.get(0).getArticleTitle()" + articleList.get(0).getArticleTitle());
-
-						System.out.println("j : " + j);
-						break;
-					} else { // update된 기사가 있으면
-						notkeywordcount++; // 키워드 상관없이 업데이트된 기사 수
+					if (articleList.get(0).getArticleLink().equals(parser.getArticleEntries().get(j).getLink())) { 
+						// update된  기사와 기존 DB에 저장된 해당 피드의 첫기사 링크를 비교하여 같으면 not updated 
+						break;	// 다음 기사로 넘어간다.
+					} else { 	// update된 기사가 있으면
+						List<Keywords> feedKeywordList = keywordService.OutputKeywordByLink(allFeed.get(index).getLink());
+						// 해당 피드에 저장된 keyword들 DB에서 불러오기
 						
-						System.out.println("\n\n\n\nERROR : " + allFeed.get(index).getLink() + "\n\n\n");
-						
-						List<Keywords> feedKeywordList = keywordDao.findKeywordByEmailAndFeedLink(user.getEmail(),
-								allFeed.get(index).getLink());
-						if (feedKeywordList.isEmpty()) { // 해당 피드에 저장된 keyword가
-															// 업으면 db에 update된
-															// 기사 저장
-							System.out.println("parser.getArticleEntries().get(0).getTitle()"
-									+ parser.getArticleEntries().get(0).getTitle());
-							articles.setUsersfeedTitle(user.getEmail() + syndFeed.getTitle());
+						if (feedKeywordList.isEmpty()) { // 해당 피드에 저장된 keyword가 업으면 db에 update된 기사 저장 
+							articles.setUsersfeedTitle(loginService.getID() + syndFeed.getTitle());
 							articles.setArticleLink(parser.getArticleEntries().get(j).getLink());
 							articles.setArticleTitle(parser.getArticleEntries().get(j).getTitle());
-							articles.setEmail(user.getEmail());
+							articles.setEmail(loginService.getID());
 							articles.setFeedTitle(syndFeed.getTitle());
 							articles.setFeedLink(allFeed.get(index).getLink());
 							articles.setContent(parser.getArticleEntries().get(j).getDescription().getValue());
@@ -130,21 +106,17 @@ public class ScheduledTasks {
 								articles.setPublishedDate(
 										dateFormat.format(parser.getArticleEntries().get(j).getPublishedDate()));
 							}
-							articleDao.insert(articles);
+							articleDao.insert(articles);		//	DB에 기사 저장
+							
 							count++;
-							updateArticleTitle = parser.getArticleEntries().get(0).getTitle();
-						} else { // 해당 피드에 저장된 keyword가 있으면
+							updatedArticleTitle = parser.getArticleEntries().get(0).getTitle();
+							
+						} else { 	// 해당 피드에 저장된 keyword가 있으면
 							System.out.println("\n.............Filtering Keyword is Starting...........\n");
-							System.out.println("feedLink : " + allFeed.get(index));
-
-							// 해당 피드의 업데이트된 기사들을 등록된 키워드들로 필터링 후 isFiltered에 저장
 
 							boolean keywordIsContained = false;
-							int keywordUpdatedCount = 0;
 
-							System.out.println(
-									"notkeywordAndupdatedArticleTitle" + parser.getArticleEntries().get(j).getTitle());
-							for (int k = 0; k < feedKeywordList.size(); k++) {
+							for (int k = 0; k < feedKeywordList.size(); k++) {	//	각 keyword별로 해당 기사에 keyword가 저장되어 있는지 탐색
 
 								if (parser.getArticleEntries().get(j).getAuthor()
 										.contains(feedKeywordList.get(k).getKeyword())) {
@@ -160,13 +132,13 @@ public class ScheduledTasks {
 									keywordIsContained = true;
 								}
 							}
-							if (keywordIsContained) {
+							if (keywordIsContained) {			// 키워드 포함된 기사 찾은 경우
 								System.out.println("\nkeyword적용된 기사 등록!!!!!!!!!!!!!!!!!!\n"
 										+ parser.getArticleEntries().get(j).getTitle() + "\n");
-								articles.setUsersfeedTitle(user.getEmail() + allFeed.get(index).getTitle());
+								articles.setUsersfeedTitle(loginService.getID() + allFeed.get(index).getTitle());
 								articles.setArticleLink(parser.getArticleEntries().get(j).getLink());
 								articles.setArticleTitle(parser.getArticleEntries().get(j).getTitle());
-								articles.setEmail(user.getEmail());
+								articles.setEmail(loginService.getID());
 								articles.setFeedTitle(allFeed.get(index).getTitle());
 								articles.setFeedLink(allFeed.get(index).getLink());
 								articles.setContent(parser.getArticleEntries().get(j).getDescription().getValue());
@@ -178,8 +150,10 @@ public class ScheduledTasks {
 								articleDao.insert(articles);
 
 								keywordIsContained = false;
+								
 								count++;
-								updateArticleTitle = parser.getArticleEntries().get(j).getTitle();
+								
+								updatedArticleTitle = parser.getArticleEntries().get(j).getTitle();
 							}
 							System.out.println("keyword count : " + count);
 
@@ -190,34 +164,26 @@ public class ScheduledTasks {
 				}
 
 				System.out.println("updatedCount : " + count);
+				
 				if (count != 0) {
 					isUpdated = true;
-
 				}
 
 				if (isUpdated) {
 					int numForUpdatedArticle = count;
-					System.out.println("user.getEmail()" + user.getEmail());
-					System.out.println("articleList.get(index).getEmail())" + articleList.get(index).getEmail());
-					if (user.getEmail().equals(articleList.get(index)
-							.getEmail())/* && numForUpdatedArticle < 14 */) {
+
+					if (loginService.getID().equals(articleList.get(index).getEmail())) {
 						if (numForUpdatedArticle == 1) {
 							this.template.convertAndSend("/topic/message",
-									articleList.get(index).getFeedTitle() + "\n" + updateArticleTitle);
+									articleList.get(index).getFeedTitle() + "\n" + updatedArticleTitle);
 						} else {
 							this.template.convertAndSend("/topic/message", articleList.get(index).getFeedTitle() + "\n"
-									+ updateArticleTitle + " 외 " + (numForUpdatedArticle - 1) + "개의 새 글");
+									+ updatedArticleTitle + " 외 " + (numForUpdatedArticle - 1) + "개의 새 글");
 						}
 					}
 
 					System.out.println("[" + dateFormat.format(new Date()) + "]" + articleList.get(index).getFeedTitle()
 							+ " is Updated!!");
-
-					for (int i = 0; i < numForUpdatedArticle; i++) {
-						System.out.println("파서에서 updated : " + parser.getArticleEntries().get(i).getTitle());
-						System.out.println("DB에 저장돼있는 not updated : " + articleList.get(i).getArticleTitle());
-					}
-
 				}
 
 				else {
@@ -229,6 +195,7 @@ public class ScheduledTasks {
 			}
 
 		}
+
 	}
 
 }

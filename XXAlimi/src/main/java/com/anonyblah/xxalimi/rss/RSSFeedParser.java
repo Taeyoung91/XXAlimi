@@ -5,15 +5,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
-//@Component
+
+
 public class RSSFeedParser {
 
 	private String feedLink;

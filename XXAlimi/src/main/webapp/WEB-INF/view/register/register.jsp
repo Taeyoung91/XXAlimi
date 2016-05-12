@@ -18,7 +18,7 @@
 			<div class="col-xs-6 col-xs-offset-3">
 				<div class="well"><h1><Strong>Register</Strong></h1>
 				<hr class="double-dashed">
-				<form class="form-horizontal" action="/register" method="POST">
+				<form class="form-horizontal" action="/register/success" method="POST">
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label" for="username">Username</label>
@@ -44,6 +44,7 @@
 							<div class="controls">
 								<input type="password" id="password" name="password"
 									placeholder="" class="form-control input-lg">
+									
 								<p class="help-block">Password should be at least 6
 									characters</p>
 							</div>
@@ -63,6 +64,7 @@
 						<div class="control-group">
 							<!-- Button -->
 							<div class="controls">
+								<input type="hidden" name="role" value="ROLE_USER" />
 								<button class="btn btn-success" type="submit">Register</button>
 							</div>
 						</div>

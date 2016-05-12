@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Homepage - XXAlimi ver 0.0.1</title>
+<link rel="stylesheet" href="/css/bootstrap-social.css">
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/stylish-portfolio.css">
@@ -17,22 +18,16 @@
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+    <script type="text/javascript" src="/js/notification.js"></script>
 </head>
-<body>
-	<!-- Header -->
-	<header id="top" class="header">
-	<div class="text-vertical-center">
-		<h1>XXAlimi</h1>
-		<h3>ver 0.0.1 for Team AnonyBlah</h3>
-		<br> <a href="/user/home/refreshFeed" class="btn btn-dark btn-lg">Refresh
-			RSS</a>
-	</div>
-	</header>
 
+<body>
+
+	<!-- Navigation -->
+	
 
 	<div class="feedView">
-
+		<%@include file="/WEB-INF/view/MenuBar.jsp" %>  
 		<h2 class="post-title">${title}</h2>
 
 		<p class="post-meta">updated on ${pubDate}</p>
@@ -62,23 +57,19 @@
 		</div>
 	</div>
 
+	<script type="text/javascript">
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+       e.preventDefault();
+       $("#sidebar-wrapper").toggleClass("active");
+   });
+   // Opens the sidebar menu
+   $("#menu-toggle").click(function(e) {
+       e.preventDefault();
+       $("#sidebar-wrapper").toggleClass("active");
+   }); 
+	</script>
+	<jsp:include page="Tail.jsp" />
 
-	<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-10 col-lg-offset-1 text-center">
-				<h4>
-					<strong>XXAlimi</strong>
-				</h4>
-				<p>
-					ver 0.0.1<br>Team AnonyBlah
-				</p>
-				<hr class="small">
-				<p class="text-muted">Copyright &copy; Hansung Univ. Capstone
-					Design 2016</p>
-			</div>
-		</div>
-	</div>
-	</footer>
 </body>
 </html>

@@ -37,6 +37,7 @@ configurations {
 }
 
 dependencies {
+	compile 'org.springframework.security:spring-security-taglibs:4.1.0.RELEASE'
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile 'log4j:log4j:1.2.17'
 	compile 'org.mybatis:mybatis:3.4.0'

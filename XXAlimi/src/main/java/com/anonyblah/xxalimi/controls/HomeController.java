@@ -28,7 +28,7 @@ import com.anonyblah.xxalimi.vo.Feeds;
  * @see ArticlesDao
  */
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/")
 public class HomeController {
 
 	
@@ -62,30 +62,36 @@ public class HomeController {
 	 * @return 표시할 View의 이름
 	 * @throws Exception
 	 */
-	@RequestMapping("/home") // "/home"으로 요청이 들어왔을때 이 Method 호출
-	public String home(HttpServletRequest request, Model model) throws Exception {
+	
+	
+	@RequestMapping("/home") // "/  home"으로 요청이 들어왔을때 이 Method 호출
+	public String home(/*HttpServletRequest request, */Model model) throws Exception {
 		
+		
+			loginService.saveID(/*request.getUserPrincipal().getName()*/);
+			
+			List<Feeds> feedList = feedService.outputFeed();
+			List<Articles> articleList = articleService.outputArticles();
 
-		String email = request.getUserPrincipal().getName();
-		loginService.saveID(email);
-		List<Feeds> feedList = feedService.outputFeed();
-		List<Articles> articleList = articleService.outputArticles();
+			model.addAttribute("feedList", feedList);
+			model.addAttribute("articleList", articleList);
 		
-		model.addAttribute("feedList", feedList);
-		model.addAttribute("articleList", articleList);
 
 		return "/user/home";
 	}
 
+	
 	@RequestMapping(value = "/delete/feed/{feedtitle}", method = RequestMethod.DELETE)
-	public String deleteFeeds(Model model,@PathVariable String feedtitle, @RequestParam String feedUrl) throws Exception {
+	public String deleteFeeds(@PathVariable String feedtitle, @RequestParam String feedUrl) throws Exception {
 		
 		feedService.deleteFeed(feedUrl);
 		keywordService.deleteKeyword(feedUrl);
 		
-		return "redirect:/user/home";
+		return "redirect:/home";
 	}
 	
+
+
 	/**
 	 * MindMapUI (Experimental)
 	 * 
@@ -94,7 +100,7 @@ public class HomeController {
 	 * @return 표시할 View의 이름
 	 * @throws Exception 
 	 */
-	@RequestMapping("/home/mindmap")
+	@RequestMapping("/mindmap")
 	public String mindmap(Model model) throws Exception {
 
 		List<Feeds> feedList = feedService.outputFeed();
@@ -132,29 +138,29 @@ public class HomeController {
 		return "/user/feedView";
 	}
 
-	// @RequestMapping("/home/article/{title}")
-	// // {title}은 @PathVariable라는 Annotation이 붙은 매개변수 title을 사용
-	// public String viewArticle(Model model, @PathVariable String title) {
-	// List<SyndFeed> list = FeedList.feedList;
-	// SyndFeed feed = null;
-	// SyndEntry article = null;
-	// for (int i = 0; i < list.size(); i++) {
-	// feed = list.get(i);
-	// @SuppressWarnings("unchecked")
-	// List<SyndEntry> articleList = feed.getEntries();
-	// for (int j = 0; j < articleList.size(); j++) {
-	// if (articleList.get(j).getTitle().equals(title)) {
-	// article = articleList.get(j);
-	// }
-	// }
-	//
-	// }
-	// model.addAttribute("title", article.getTitle());
-	// model.addAttribute("pubDate", article.getPublishedDate());
-	// model.addAttribute("article", article);
-	//
-	// return "/user/articleView";
-	// }
+/*	@RequestMapping("/home/article/{title}")
+	// {title}은 @PathVariable라는 Annotation이 붙은 매개변수 title을 사용
+	public String viewArticle(Model model, @PathVariable String title) {
+		List<SyndFeed> list = FeedList.feedList;
+		SyndFeed feed = null;
+		SyndEntry article = null;
+		for (int i = 0; i < list.size(); i++) {
+			feed = list.get(i);
+			@SuppressWarnings("unchecked")
+			List<SyndEntry> articleList = feed.getEntries();
+			for (int j = 0; j < articleList.size(); j++) {
+				if (articleList.get(j).getTitle().equals(title)) {
+					article = articleList.get(j);
+				}
+			}
+
+		}
+		model.addAttribute("title", article.getTitle());
+		model.addAttribute("pubDate", article.getPublishedDate());
+		model.addAttribute("article", article);
+
+		return "/user/articleView";
+	}*/
 
 	/**
 	 * FeedFresh라는 버튼을 누르면 정해진 URI에서 Feed를 읽어 저장하고 다시 Home으로 Redirect

@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/stylish-portfolio.css">
+<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" href="/css/bootstrap-social.css">
 <link rel="stylesheet" href="/css/mindmap/js-mindmap.css" type="text/css">
 <link rel="stylesheet" href="/css/mindmap/style.css" type="text/css">
 <!-- jQuery -->
@@ -15,14 +21,18 @@
 <script src="/js/mindmap/raphael-min.js" type="text/javascript"></script>
 <script src="/js/mindmap/js-mindmap.js" type="text/javascript"></script>
 <script src="/js/mindmap/script.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/notification.js"></script>
+	
 <title>Feeds Space</title>
+
 </head>
 <body>
-<!-- 	<ul>
-		<li><a href="#">YOU!</a>
-			<ul id="feeds"></ul>
-		</li>
-	</ul> -->
+
+	<!-- Navigation -->
+
+	<%@include file="/WEB-INF/view/MenuBar.jsp" %>  
+
+
 	<ul class="space">
 		<li><a href="#">YOU!</a>
 			<ul id="feeds">
@@ -38,5 +48,6 @@
 			</ul>
 		</li>
 	</ul>
+
 </body>
 </html>

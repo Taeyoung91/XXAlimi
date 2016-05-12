@@ -3,6 +3,7 @@ create table users (
     username	varchar(50)	not null	comment '이메일',
     password	varchar(100) not null	comment '비밀번호',
     name		varchar(20)	not null	comment '사용자이름',
+    role		varchar(20)	not null	comment '권한',
     cre_date	datetime	not null	comment '가입일',
     enabled		tinyint(4)	not null	comment 'default',
     constraint	pk_user_num	primary key	(user_num)
@@ -13,14 +14,13 @@ comment '사용자정보';
 create unique index uix_users on users ( username asc );
 
 
-create table authorities (
-	user_role_id	integer	not null	auto_increment	comment '권한번호',
-    username		varchar(20)	not null	comment '이메일',
-    authority		varchar(20)	not null	comment '권한',
-    constraint pk_user_role_id primary key (user_role_id),
-    constraint fk_username foreign key (username) references users (username)
-)
-comment '권한정보';
+CREATE TABLE persistent_logins (
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null,
+    PRIMARY KEY (series)
+);
 
 create table  feeds (
       feed_id         integer		not null    auto_increment  comment '피드번호',
@@ -50,7 +50,7 @@ create table  feeds (
       articlelink       varchar(500)    default null 				comment '기사주소',
       feedtitle       varchar(100)			not null    comment '피드명',
       feedlink        varchar(200)	not null	comment '피드주소',
-      articleauthority  varchar(50)     							comment '기사작성자',
+      articleauthority  varchar(100)     							comment '기사작성자',
       articletitle    	varchar(100)  	default null   				comment '기사제목',
       content         	text  			default null  				comment '기사내용',
       pub_date        varchar(45) 			default null  comment '등록날짜',
