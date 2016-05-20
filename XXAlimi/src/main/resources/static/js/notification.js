@@ -10,16 +10,39 @@ function equalHeight(group) {
 };
 
 function startWebSocket() {
-	var socket = new SockJS('/stomp');
+	var socket = new SockJS('/WebSocket');
 	
-	var stompClient = Stomp.over(socket);
+	stompClient = Stomp.over(socket);
 	
 	stompClient.connect({ }, function(frame) {
-		stompClient.subscribe("/topic/message", function(data) {
+		hasConntected = true;
+		
+		stompClient.subscribe("/user/message/notification", function(data) {
 			var message = data.body;
+			console.log(message);
 			notifyMessage(message);
 		});
 	});
+}
+
+function startWebSocketLow() {
+	var wSocket = new WebSocket("ws://localhost:8080/notification");
+	
+	wSocket.onopen = function(e){  
+		console.log("Socket has been opened! : "); 
+	} 
+	
+	wSocket.onerror = function(event) {
+		console.log("WebSocket Error : ", event.reason);
+	}
+	
+	wSocket.onmessage = function(msg) {
+		notifyMessage(msg);
+	}
+	
+	wSocket.onclose = function(e){  
+		console.log("Socket has been closed : ", e);
+	}
 }
 
 function notifyMessage(msg) {

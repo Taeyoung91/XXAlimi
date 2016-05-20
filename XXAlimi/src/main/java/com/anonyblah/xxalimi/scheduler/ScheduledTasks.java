@@ -5,17 +5,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.anonyblah.xxalimi.controls.HomeController;
 import com.anonyblah.xxalimi.dao.ArticlesDao;
 import com.anonyblah.xxalimi.rss.RSSFeedParser;
 import com.anonyblah.xxalimi.service.ArticleService;
 import com.anonyblah.xxalimi.service.FeedService;
 import com.anonyblah.xxalimi.service.KeywordService;
 import com.anonyblah.xxalimi.service.LoginService;
+import com.anonyblah.xxalimi.service.SessionService;
+import com.anonyblah.xxalimi.service.UserDetailsImpl;
 import com.anonyblah.xxalimi.vo.Articles;
 import com.anonyblah.xxalimi.vo.Feeds;
 import com.anonyblah.xxalimi.vo.Keywords;
@@ -24,7 +29,7 @@ import com.sun.syndication.feed.synd.SyndFeed;
 @Component("ScanningFeed")
 public class ScheduledTasks {
 
-
+	private static Logger log = LoggerFactory.getLogger(HomeController.class);
 
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd E HH:mm:ss");
 	
@@ -33,13 +38,12 @@ public class ScheduledTasks {
 	FeedService feedService;
 	
 	@Autowired
-	LoginService loginService;
-	
-	@Autowired
 	ArticleService articleService;
 	
 	@Autowired
 	KeywordService keywordService;
+	
+	@Autowired SessionService sessionService;
 	
 	@Autowired // Spring에서 자동으로 Set
 	private ArticlesDao articleDao;
@@ -56,7 +60,7 @@ public class ScheduledTasks {
 		System.out.println(
 				"scanningFeed() 실행==============================================================================\n\n");
 
-		if (loginService.getID() != null) {							// 현재 로그인 된 상태 일 때
+		if (sessionService.getLoggedInUsers().size() > 0) {							// 현재 로그인 된 상태 일 때
 
 			List<Feeds> allFeed = feedService.outputFeed();			// 저장된 피드 전체 DB에서 불러오기
 
@@ -71,12 +75,12 @@ public class ScheduledTasks {
 				int count = 0;
 				
 				List<Articles> articleList 
-				= articleService.outputArticlesByLink(allFeed.get(index).getLink());	//	각 피드에 딸린 기사 전체 DB에서 불러오기
+				= articleService.outputArticlesByUserFeedTitle(allFeed.get(index).getUsersfeedTitle());	//	각 피드에 딸린 기사 전체 DB에서 불러오기
 
 				System.out.println("---------Update Logic---------");
 
 
-				Hibernate.initialize(articleList);
+				//Hibernate.initialize(articleList);
 
 				RSSFeedParser parser = new RSSFeedParser(allFeed.get(index).getLink());	// 파싱 진행
 				parser.readFeed();
@@ -94,10 +98,10 @@ public class ScheduledTasks {
 						// 해당 피드에 저장된 keyword들 DB에서 불러오기
 						
 						if (feedKeywordList.isEmpty()) { // 해당 피드에 저장된 keyword가 업으면 db에 update된 기사 저장 
-							articles.setUsersfeedTitle(loginService.getID() + syndFeed.getTitle());
+							articles.setUsersfeedTitle(allFeed.get(index).getEmail() + syndFeed.getTitle());
 							articles.setArticleLink(parser.getArticleEntries().get(j).getLink());
 							articles.setArticleTitle(parser.getArticleEntries().get(j).getTitle());
-							articles.setEmail(loginService.getID());
+							articles.setEmail(allFeed.get(index).getEmail());
 							articles.setFeedTitle(syndFeed.getTitle());
 							articles.setFeedLink(allFeed.get(index).getLink());
 							articles.setContent(parser.getArticleEntries().get(j).getDescription().getValue());
@@ -135,10 +139,10 @@ public class ScheduledTasks {
 							if (keywordIsContained) {			// 키워드 포함된 기사 찾은 경우
 								System.out.println("\nkeyword적용된 기사 등록!!!!!!!!!!!!!!!!!!\n"
 										+ parser.getArticleEntries().get(j).getTitle() + "\n");
-								articles.setUsersfeedTitle(loginService.getID() + allFeed.get(index).getTitle());
+								articles.setUsersfeedTitle(allFeed.get(index).getEmail() + allFeed.get(index).getTitle());
 								articles.setArticleLink(parser.getArticleEntries().get(j).getLink());
 								articles.setArticleTitle(parser.getArticleEntries().get(j).getTitle());
-								articles.setEmail(loginService.getID());
+								articles.setEmail(allFeed.get(index).getEmail());
 								articles.setFeedTitle(allFeed.get(index).getTitle());
 								articles.setFeedLink(allFeed.get(index).getLink());
 								articles.setContent(parser.getArticleEntries().get(j).getDescription().getValue());
@@ -171,14 +175,17 @@ public class ScheduledTasks {
 
 				if (isUpdated) {
 					int numForUpdatedArticle = count;
-
-					if (loginService.getID().equals(articleList.get(index).getEmail())) {
-						if (numForUpdatedArticle == 1) {
-							this.template.convertAndSend("/topic/message",
-									articleList.get(index).getFeedTitle() + "\n" + updatedArticleTitle);
-						} else {
-							this.template.convertAndSend("/topic/message", articleList.get(index).getFeedTitle() + "\n"
-									+ updatedArticleTitle + " 외 " + (numForUpdatedArticle - 1) + "개의 새 글");
+					for(final Object user : sessionService.getLoggedInUsers()) {
+						final UserDetailsImpl temp = (UserDetailsImpl)user;
+						log.info(temp.getUsername());
+						if (temp.getUsername().equals(articleList.get(index).getEmail())) {
+							if (numForUpdatedArticle == 1) {
+								this.template.convertAndSendToUser(temp.getUsername(), "/message/notification",
+										articleList.get(index).getFeedTitle() + "\n" + updatedArticleTitle);
+							} else {
+								this.template.convertAndSendToUser(temp.getUsername(), "/message/notification", articleList.get(index).getFeedTitle() + "\n"
+										+ updatedArticleTitle + " 외 " + (numForUpdatedArticle - 1) + "개의 새 글");
+							}
 						}
 					}
 
@@ -197,5 +204,4 @@ public class ScheduledTasks {
 		}
 
 	}
-
 }

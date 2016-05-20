@@ -42,7 +42,7 @@ public interface ArticlesDao {
 			@Result(property = "createdDate", column = "cre_date")
 		})	
 	@Select("select * from articles "
-			+ "where usersfeedtitle = #{usersfeedTitle} "
+			+ "where usersfeedtitle = #{usersfeedTitle} " 	
 			+ "order by cre_date desc")
 	List<Articles> findArticleByTitle(String usersfeedTitle) throws Exception;
 	
@@ -64,4 +64,19 @@ public interface ArticlesDao {
 	@Insert("insert into articles (usersfeedtitle, username, articlelink, feedtitle, feedlink, articleauthority, articletitle, content, pub_date, cre_date)"
 			+ "values (#{usersfeedTitle}, #{email}, #{articleLink}, #{feedTitle}, #{feedLink}, #{articleAuthority}, #{articleTitle}, #{content}, #{publishedDate}, now())")
 	void insert(Articles article) throws Exception;
+
+	@Results({
+		@Result(property = "id", column = "article_id"),
+		@Result(property = "usersfeedTitle", column = "usersfeedtitle"),
+		@Result(property = "email", column = "username"),
+		@Result(property = "feedLink", column = "feedlink"),
+		@Result(property = "articleLink", column = "articlelink"),
+		@Result(property = "articleTitle", column = "articletitle"),
+		@Result(property = "publishedDate", column = "pub_date"),
+		@Result(property = "createdDate", column = "cre_date")
+	})	
+	@Select("select * from articles "
+			+ "where usersfeedtitle = #{userFeedTitle} "
+			+ "order by cre_date desc")
+	List<Articles> findArticleByUserFeedTitle(String userFeedTitle);
 }

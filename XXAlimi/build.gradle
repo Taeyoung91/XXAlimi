@@ -70,6 +70,8 @@ dependencies {
 	compile("org.springframework:spring-messaging")
 	compile('org.webjars.bower:sockjs-client:1.0.3')
 	compile('org.webjars.bower:stomp-websocket:2.3.4')
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 }
 
 

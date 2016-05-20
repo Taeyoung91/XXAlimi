@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-
 import com.anonyblah.xxalimi.vo.Users;
 
 import lombok.Getter;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @SuppressWarnings("serial")
 @Setter
 @Getter
-public class UserDetailsImpl extends User {
+public class UserDetailsImpl extends User{
 
 	private String nickName;
 	
@@ -32,7 +31,5 @@ public class UserDetailsImpl extends User {
 		
 		authorities.add(new SimpleGrantedAuthority(user.getRole()));
 		return authorities;
-		
 	}
-
 }

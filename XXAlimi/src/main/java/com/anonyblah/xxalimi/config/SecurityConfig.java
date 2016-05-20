@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -20,10 +21,8 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import com.anonyblah.xxalimi.service.LoginService;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-	
 	
 	private static final String REMEMBER_ME_KEY = "rememberMe";
 
@@ -35,8 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	LoginService loginService;
-	
-	
 	 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -45,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/font-awesome/**", "/stomp/**", "/webjars/**", "/css/**", "/js/**", "/img/**"); // /webjars/나 /css와  같은 정적 리소스에 접근시 시큐리터 설정 무시
 	}
 
+	@Override
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService)
@@ -119,9 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	// Register HttpSessionEventPublisher
 	@Bean
-	public static ServletListenerRegistrationBean httpSessionEventPublisher() {
-		return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+	public static ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+		return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
 	}
-
-
 }

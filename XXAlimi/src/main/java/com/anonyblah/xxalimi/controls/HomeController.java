@@ -4,13 +4,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anonyblah.xxalimi.dao.ArticlesDao;
 import com.anonyblah.xxalimi.dao.FeedsDao;
@@ -18,6 +22,7 @@ import com.anonyblah.xxalimi.service.ArticleService;
 import com.anonyblah.xxalimi.service.FeedService;
 import com.anonyblah.xxalimi.service.KeywordService;
 import com.anonyblah.xxalimi.service.LoginService;
+import com.anonyblah.xxalimi.utils.FeedToSimpJsonConverter;
 import com.anonyblah.xxalimi.vo.Articles;
 import com.anonyblah.xxalimi.vo.Feeds;
 
@@ -31,6 +36,7 @@ import com.anonyblah.xxalimi.vo.Feeds;
 //@RequestMapping("/")
 public class HomeController {
 
+	private static Logger log = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
 	LoginService loginService;
@@ -64,13 +70,21 @@ public class HomeController {
 	 */
 	
 	
-	@RequestMapping("/home") // "/  home"으로 요청이 들어왔을때 이 Method 호출
-	public String home(/*HttpServletRequest request, */Model model) throws Exception {
+	@RequestMapping(value = "/home", method=RequestMethod.GET, produces="application/json", headers="user-agent=mobapp/aos")
+	public @ResponseBody List<Feeds> fetchFeedsJson() throws Exception {
+		log.info("mobile accessed");
+		FeedToSimpJsonConverter converter = new FeedToSimpJsonConverter();
 		
+		return converter.convert(feedService.outputFeed(), articleService.outputArticles());
+	}
+	
+	@RequestMapping(value = "/home", method=RequestMethod.GET) // "/  home"으로 요청이 들어왔을때 이 Method 호출
+	public String home(HttpServletRequest request, @RequestHeader(value = "User-Agent") String userAgent, Model model) throws Exception {
 		
+			log.info(userAgent);
 			loginService.saveID(/*request.getUserPrincipal().getName()*/);
 			
-			List<Feeds> feedList = feedService.outputFeed();
+			List<Feeds> feedList = feedService.outputFeedByEmail(request.getUserPrincipal().getName());
 			List<Articles> articleList = articleService.outputArticles();
 
 			model.addAttribute("feedList", feedList);
@@ -79,6 +93,8 @@ public class HomeController {
 
 		return "/user/home";
 	}
+	
+	
 
 	
 	@RequestMapping(value = "/delete/feed/{feedtitle}", method = RequestMethod.DELETE)

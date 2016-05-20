@@ -33,6 +33,19 @@ public interface FeedsDao {
 			+ "where username = #{email} "
 			+ "order by feed_id desc")
 	List<Feeds> findAllFeedsByEmail(String email) throws Exception;
+	
+	@Results({
+		@Result(property = "id", column = "feed_id"),
+		@Result(property = "link", column = "feedlink"),
+		@Result(property = "usersfeedTitle", column = "usersfeedtitle"),
+		@Result(property = "title", column = "feedtitle"),
+		@Result(property = "author", column = "feedauthor"),
+		@Result(property = "email", column = "username"),
+		@Result(property = "publishedDate", column = "pub_date"),
+		@Result(property = "createdDate", column = "cre_date")
+	})	
+	@Select("select * from feeds")
+	List<Feeds> findAllFeeds() throws Exception;
 
 	
 	@Insert("insert into feeds (username, feedlink, usersfeedtitle, feedtitle, feedauthor, copyright, imageurl, language, pub_date, cre_date)"

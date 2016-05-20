@@ -28,13 +28,17 @@ public class FeedService {
 		
 	}
 	
+	public List<Feeds> outputFeedByEmail(String email) throws Exception {
+		return feedDao.findAllFeedsByEmail(email);
+	}
+	
 	public List<Feeds> outputFeed() throws Exception{
-		return feedDao.findAllFeedsByEmail(loginService.getID());
+		return feedDao.findAllFeeds();
+		//return feedDao.findAllFeedsByEmail(loginService.getID());
 	}
 	
 	public void insertFeed(SyndFeed syndFeed, String feedUrl) throws Exception{
-		
-		
+	
 		feeds.setTitle(syndFeed.getTitle());	// feed vo에 저장
 		feeds.setEmail(loginService.getID()); 	// 현재 로그인딘 계정을 jsp에서 바로 가져옴
 		feeds.setLink(feedUrl);					// 사용자가 저장한 링크 주소를 직접 vo에 저장

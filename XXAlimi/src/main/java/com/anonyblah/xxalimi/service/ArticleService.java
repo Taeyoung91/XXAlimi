@@ -29,13 +29,19 @@ public class ArticleService {
 	public List<Articles> outputArticles() throws Exception{
 		return articleDao.findAllArticlesByEmail(loginService.getID());
 	}
-	
+
+	@Deprecated
 	public List<Articles> outputArticlesByTitle(String feedTitle) throws Exception{
 		return articleDao.findArticleByTitle(loginService.getID()+feedTitle);
 	}
-	
+
+	@Deprecated
 	public List<Articles> outputArticlesByLink(String feedLink) throws Exception{
 		return articleDao.findArticlesByEmailAndFeedUrl(feedLink, loginService.getID());
+	}
+	
+	public List<Articles> outputArticlesByUserFeedTitle(String userFeedTitle) throws Exception {
+		return articleDao.findArticleByUserFeedTitle(userFeedTitle);
 	}
 	
 	public void insertArticleList(RSSFeedParser parser, SyndFeed syndFeed, String feedLink) throws Exception{
