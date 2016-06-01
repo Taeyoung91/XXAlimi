@@ -240,13 +240,14 @@ public class ScheduledTasks {
 										this.template.convertAndSendToUser(temp.getUsername(), "/message/notification",
 												articleList.get(n).getFeedTitle() + "\n" + updatedArticleTitle + 
 												"\n" + " # 키워드 :: " + articleList.get(n).getKeyword());
-								
+										sendToMobile(temp.getUsername(), articleList.get(n).getFeedTitle());
 										break;
 									} else {
 										this.template.convertAndSendToUser(temp.getUsername(), "/message/notification",
 												articleList.get(n).getFeedTitle() + "\n" + updatedArticleTitle + " 외 "
 														+ (numForUpdatedArticle - 1) + "개의 새 글" + 
 														"\n" + " # 키워드 :: " + articleList.get(n).getKeyword());
+										sendToMobile(temp.getUsername(), articleList.get(n).getFeedTitle());
 										break;
 									}
 								}
@@ -278,6 +279,7 @@ public class ScheduledTasks {
 										articleList.get(index).getFeedTitle() + "\n" + updatedArticleTitle + " 외 "
 												+ (numForUpdatedArticle - 1) + "개의 새 글") ;
 							}
+							sendToMobile(temp.getUsername(), articleList.get(index).getFeedTitle());
 						}
 					}
 
@@ -297,5 +299,9 @@ public class ScheduledTasks {
 
 		}
 
+	}
+	private void sendToMobile(String email, String title) {
+		// For Mobile App
+		this.template.convertAndSend("/topic/message/" + email, title + "에서 새 글을 읽을 수 있습니다.");
 	}
 }

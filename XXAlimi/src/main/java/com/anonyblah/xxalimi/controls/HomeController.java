@@ -73,12 +73,12 @@ public class HomeController {
 	 * @throws Exception
 	 */
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET, produces = "application/json", headers = "user-agent=mobapp/aos")
+	@RequestMapping(value = "/home/mobile", method=RequestMethod.GET, produces="application/json")
 	public @ResponseBody List<Feeds> fetchFeedsJson() throws Exception {
 		log.info("mobile accessed");
 		FeedToSimpJsonConverter converter = new FeedToSimpJsonConverter();
-
-		return converter.convert(feedService.outputFeed(), articleService.outputArticles());
+		
+		return converter.convert(feedService.outputFeedByEmail(SecurityContextHolder.getContext().getAuthentication().getName()), articleService.outputArticles());
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET) // "/ home"으로
