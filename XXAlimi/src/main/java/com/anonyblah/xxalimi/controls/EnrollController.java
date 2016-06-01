@@ -1,5 +1,8 @@
 package com.anonyblah.xxalimi.controls;
 
+import java.net.URLEncoder;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.anonyblah.xxalimi.service.ArticleService;
 import com.anonyblah.xxalimi.service.EnrollService;
+import com.anonyblah.xxalimi.service.FeedService;
+import com.anonyblah.xxalimi.service.KeywordService;
+import com.anonyblah.xxalimi.service.LoginService;
+import com.anonyblah.xxalimi.vo.Articles;
+import com.anonyblah.xxalimi.vo.Feeds;
 
 
 @Controller
@@ -17,6 +26,17 @@ public class EnrollController {
 	@Autowired
 	private EnrollService enrollService;
 	
+	@Autowired
+	LoginService loginService;
+
+	@Autowired
+	FeedService feedService;
+	
+	@Autowired
+	ArticleService articleService;
+	
+	@Autowired
+	KeywordService keywordService;
 	
 	
 	//등록을 위한 첫 페이지(검색)
@@ -27,12 +47,37 @@ public class EnrollController {
 		return "add/searchPage";
 	}
 
+	
 	//검색 결과를 받아 DB에 입력할것임
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String insertPage(@RequestParam String feedUrl) throws Exception{
+	public String insertPage(@RequestParam String feedUrl, Model model) throws Exception{
 		
-		enrollService.enrollFeed(feedUrl);
+		boolean isDuplicated = enrollService.enrollFeed(feedUrl);
 		
+		List<Articles> articleList = articleService.outputArticles();
+		List<Feeds> feedList = feedService.outputFeedByEmail(loginService.getID());
+		model.addAttribute("isDuplicated", isDuplicated);
+		model.addAttribute("feedList", feedList);
+		model.addAttribute("articleList", articleList);
+		
+//		return "/user/home";
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/naver/save", method = RequestMethod.POST)
+	public String insertNaverPage(@RequestParam String naverWord, Model model) throws Exception{
+		String encodeResult = URLEncoder.encode(naverWord, "UTF-8");
+		String feedUrl = "http://newssearch.naver.com/search.naver?where=rss&query=" + encodeResult + "&field=0";
+		
+		boolean isDuplicated = enrollService.enrollFeed(feedUrl);
+		
+		List<Articles> articleList = articleService.outputArticles();
+		List<Feeds> feedList = feedService.outputFeedByEmail(loginService.getID());
+		model.addAttribute("isDuplicated", isDuplicated);
+		model.addAttribute("feedList", feedList);
+		model.addAttribute("articleList", articleList);
+		
+//		return "/user/home";
 		return "redirect:/home";
 	}
 	

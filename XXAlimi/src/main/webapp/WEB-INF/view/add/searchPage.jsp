@@ -12,10 +12,11 @@
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <script src="/js/feedSearchApi.js" type="text/javascript"></script>
 <script>
-function setModalTitle() {
-	var searchText = document.getElementById("input").value;
-	document.getElementById("searchResultModalTitle").innerHTML = "<i class=\"glyphicon glyphicon-search\"/> \"" +searchText + "\"의 검색 결과";
-}
+	function setModalTitle() {
+		var searchText = document.getElementById("input").value;
+		document.getElementById("searchResultModalTitle").innerHTML = "<i class=\"glyphicon glyphicon-search\"/> \""
+				+ searchText + "\"의 검색 결과";
+	}
 </script>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css">
@@ -25,35 +26,50 @@ function setModalTitle() {
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="/js/notification.js"></script>
+<script type="text/javascript" src="/js/notification.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body class="searchbg1">
 	<!-- Navigation -->
-	<%@include file="/WEB-INF/view/MenuBar.jsp" %>  
-	<aside class="searchbg" style="padding:15px">
+	<%@include file="/WEB-INF/view/MenuBar.jsp"%>
+	<aside class="searchbg">
 	<div class="text-vertical-center">
-	<h1>RSS Feed 추가하기</h1>
-	<p>
-		검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
-	</p>
-	<p>
-		USER ID : ${ pageContext.request.userPrincipal.name}
-	</br>
-	<a href="${pageContext.request.contextPath}/logout">LOGOUT</a>
-	
-	</br>
-	<br /></p>
-	<p>
+		<div class="text-vertical-left col-md-8 col-md-offset-2">
+			<h1>RSS Feeds 추가하기</h1>
+			<h4>
+				검색을 통해 RSS Feed를 선택하여 추가하거나 <br /> 직접 URL을 입력해서 Feed를 추가하세요!
+			</h4>
+		</div>
+
+		<div class="col-md-offset-7">
+
+			<strong>${ pageContext.request.userPrincipal.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+			<a href="${pageContext.request.contextPath}/logout"> <strong>LOGOUT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+			</a> </br>
+
+		</div>
+
+		</br> <br />
+		</p>
+		<p>
+
+			<!-- /.row -->
+		</p>
+	</div>
+	</aside>
+	<br>
+	<br>
 	<div class="row">
-    	<div class="col-sm-6 col-sm-offset-3">
-			<form method="post" onsubmit="return onSubmit()" class="form-horizontal">
+		<div class="col-sm-6 col-sm-offset-3">
+			<form method="post" onsubmit="return onSubmit()"
+				class="form-horizontal">
 				<div class="input-group">
 					<input id="input" type="text" class="form-control"
-						placeholder="검색어 입력..."> <span class="input-group-btn">
-						<button class="btn btn-default" type="submit" data-toggle="modal"
+						placeholder="검색어 입력..."> 
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" data-toggle="modal"
 							data-toggle="tooltip" data-target="#searchResultModal">Search!</button>
-					</span>
+						</span>
 				</div>
 				<!-- /input-group -->
 			</form>
@@ -62,15 +78,16 @@ function setModalTitle() {
 	</div>
 	<!-- /.row -->
 	</p>
-	<p></p>
-	<p>
+
 	<div class="row">
-    	<div class="col-sm-6 col-sm-offset-3">
+		<div class="col-sm-6 col-sm-offset-3">
 			<form action="/add/save" name=insertForm method="post">
 				<div class="input-group">
 					<input type="url" id="feedUrl" name=feedUrl class="form-control"
-						placeholder="URL 입력..." required> <span class="input-group-btn">
-						<button id="saveBtn" title="Click this to Save!" class="btn btn-default hover-tooltip" type="submit">Save!</button>
+						placeholder="URL 입력..." required> <span
+						class="input-group-btn">
+						<button id="saveBtn" title="Click this to Save!"
+							class="btn btn-default hover-tooltip" type="submit">Save!</button>
 					</span>
 				</div>
 				<!-- /input-group -->
@@ -78,58 +95,67 @@ function setModalTitle() {
 		</div>
 		<!-- /.col-lg-6 -->
 	</div>
-	<!-- /.row -->
+
+	<p>
+		<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+				<form action="/add/naver/save" name="naverForm" method="post">
+					<div class="input-group">
+						<input type="text" id="naverWord" name="naverWord"
+						class="form-control" placeholder="NAVER 뉴스 검색.." required>
+
+						<span class="input-group-btn">
+							<button id="saveBtn" title="Click this to Save!"
+							class="btn btn-default hover-tooltip" type="submit">Save!</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</form>
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
+		<!-- /.row -->
 	</p>
-	</div>
-	</aside>
-	<!-- Modal -->
+   <!-- Modal -->
 	<div class="modal fade" id="searchResultModal" tabindex="-1"
 		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="searchResultModalTitle">""의 검색 결과</h4>
-				</div>
-				<div class="modal-body">
-					<div id="feedControl" class="list-group"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- <form action="/add/save" name=insertForm method=get>
-		<table border=0 width=600 align=center>
-			<tr>
-				<td align=right>URL :</td>
-				<td><input type=text name=feedUrl size=30 maxlength=200></td>
-				<td><input type="submit" value="저장"></td>
-			</tr>
-
-		</table>
-	</form> -->
-	<script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
-	<script>
-	$('#searchResultModal').on('shown.bs.modal', function () {
-		setModalTitle();
-	})
-	    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-	</script>
-
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               <h4 class="modal-title" id="searchResultModalTitle">""의 검색 결과</h4>
+            </div>
+            <div class="modal-body">
+               <div id="feedControl" class="list-group"></div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default"
+						data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <script src="/webjars/jquery/2.2.2/dist/jquery.min.js"></script>
+   <script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
+   <script>
+				$('#searchResultModal').on('shown.bs.modal', function() {
+					setModalTitle();
+				})
+				// Closes the sidebar menu
+				$("#menu-close").click(function(e) {
+					e.preventDefault();
+					$("#sidebar-wrapper").toggleClass("active");
+				});
+				// Opens the sidebar menu
+				$("#menu-toggle").click(function(e) {
+					e.preventDefault();
+					$("#sidebar-wrapper").toggleClass("active");
+				});
+			</script>
+   <jsp:include page="/WEB-INF/view/user/Tail.jsp" />
 </body>
 </html>

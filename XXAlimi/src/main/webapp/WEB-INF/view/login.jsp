@@ -40,18 +40,18 @@
 				<sec:authorize access="isAnonymous()">
 					
 
-
-
 					<form name="loginSuccess" action="/login" class="form-signin"
 						method="post">
 
 						<c:if test="${param.error != null}">
 							<font color="red"">
 								Login ERROR!</br>
+								Check your E-mail or Password
+								<%-- </br>
 								<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != NULL}">
 								MESSAGE: <c:out
 										value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
-								</c:if>
+								</c:if> --%>
 							</font>
 														
 						</c:if>

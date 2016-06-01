@@ -34,6 +34,7 @@ public interface FeedsDao {
 			+ "order by feed_id desc")
 	List<Feeds> findAllFeedsByEmail(String email) throws Exception;
 	
+	
 	@Results({
 		@Result(property = "id", column = "feed_id"),
 		@Result(property = "link", column = "feedlink"),
@@ -60,5 +61,20 @@ public interface FeedsDao {
 	// SyndFeed selectOne(int no) throws Exception;
 	// int update(SyndFeed member) throws Exception;
 	// SyndFeed exist(String feedUrl) throws Exception;
+
+	@Results({
+		@Result(property = "id", column = "feed_id"),
+		@Result(property = "link", column = "feedlink"),
+		@Result(property = "usersfeedTitle", column = "usersfeedtitle"),
+		@Result(property = "title", column = "feedtitle"),
+		@Result(property = "author", column = "feedauthor"),
+		@Result(property = "email", column = "username"),
+		@Result(property = "publishedDate", column = "pub_date"),
+		@Result(property = "createdDate", column = "cre_date")
+	})
+	
+	@Select("select * from feeds "
+			+"where feedtitle = #{title}")
+	List<Feeds> findFeedsByTitle(@Param("title") String title);
 
 }

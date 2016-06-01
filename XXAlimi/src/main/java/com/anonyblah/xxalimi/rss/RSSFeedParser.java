@@ -21,6 +21,7 @@ public class RSSFeedParser {
 	//
 	// private ArticleDao articleDao;
 
+	String feedUrl;
 	URL url;
 	SyndFeedInput input;
 	SyndFeed feed;
@@ -30,6 +31,7 @@ public class RSSFeedParser {
 	public RSSFeedParser(String feedUrl) throws MalformedURLException {
 		url = new URL(feedUrl);
 		input = new SyndFeedInput();
+		this.feedUrl = feedUrl;
 	}
 
 	public void readFeed() throws IllegalArgumentException, FeedException, IOException {
@@ -51,6 +53,10 @@ public class RSSFeedParser {
 	
 	public List<SyndEntry> getArticleEntries() {
 		return articleEntries;
+	}
+	
+	public String getFeedUrl(){
+		return feedUrl;
 	}
 	
 }

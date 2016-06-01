@@ -248,8 +248,8 @@ hr.small {
 /* media img sizing */
 
 img.media-object {
-	max-height: 150px;
- 	height: expression(this.height > 150 ? 150: true);
+   max-height: 150px;
+    height: expression(this.height > 150 ? 150: true);
 }
 
 /* Footer */
@@ -261,11 +261,28 @@ footer {
 .searchbg {
     display: table;
     width: 100%;
-    height: 100%;
+    height: 200px;
     color: #fff;
+    padding: 15px;
     background: linear-gradient(
-      rgba(0, 0, 0, 0.5), 
-      rgba(0, 0, 0, 0.5)
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ), no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.searchbg1 {
+    display: table;
+    width: 100%;
+    height: 200px;
+    color: #fff;
+    padding: 15px;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.7), 
+      rgba(255, 255, 255, 0.7)
     ), url(../img/search02.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -273,15 +290,96 @@ footer {
     -o-background-size: cover;
 }
 
+.feedbg1 {
+    display: table;
+    width: 50%;
+    height: 500px;
+    color: #fff;
+    padding: 15px;
+    background: linear-gradient(
+      rgba(170, 190, 50, 0.7), 
+      rgba(170, 190, 50, 0.7)
+    ), no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+}
+
+.feedbg2 {
+    display: table;
+    width: 50%;
+    height: 500px;
+    color: #fff;
+    padding: 15px;
+    background: linear-gradient(
+      rgba(170, 50, 190, 0.7), 
+      rgba(170, 50, 190, 0.7)
+    ), no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+}
+
 .homebg {
     display: table;
     width: 100%;
-    height: 150px;
+    height: 200px;
     color: #fff;
     background: linear-gradient(
-      rgba(0, 0, 0, 0.4), 
-      rgba(0, 0, 0, 0.4)
-    ), url(../img/home01.jpg) no-repeat center center scroll;
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ), no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    padding: 10px;
+}
+
+.homebg1 {
+    display: table;
+    width: 100%;
+    height: 200px;
+    color: #fff;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.7), 
+      rgba(255, 255, 255, 0.7)
+    ), url(../img/home02.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    padding: 10px;
+}
+.homebg2 {
+    display: table;
+    width: 100%;
+    height: 200px;
+    color: #fff;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.7), 
+      rgba(255, 255, 255, 0.7)
+    ), url(../img/portfolio-1.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    padding: 10px;
+}
+
+.articleView {
+   display: table;
+    width: 100%;
+    height: 200px;
+    color: #fff;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.7), 
+      rgba(255, 255, 255, 0.7)
+    ), url(../img/home02.jpg) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -290,8 +388,8 @@ footer {
 }
 
 .register {
-	display: table;
-	position: relative;
+   display: table;
+   position: relative;
     width: 100%;
     height: 100%;
     color: #000;
@@ -300,6 +398,13 @@ footer {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+}
+
+.tail {
+   padding: 10px;
+   display: table;
+    width: 100%;
+    height: 50px;
 }
 
 li.list-group-item {

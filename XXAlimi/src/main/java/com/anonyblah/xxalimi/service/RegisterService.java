@@ -38,5 +38,12 @@ public class RegisterService {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 	}
+	
+	public void deleteUser(String email) throws Exception{
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		auth.setAuthenticated(false);
+		userDao.delete(email);
+		
+	}
 		
 }

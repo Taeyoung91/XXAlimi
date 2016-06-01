@@ -1,5 +1,6 @@
 package com.anonyblah.xxalimi.controls;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,23 +37,23 @@ import com.anonyblah.xxalimi.vo.Feeds;
  * @see ArticlesDao
  */
 @Controller
-//@RequestMapping("/")
+// @RequestMapping("/")
 public class HomeController {
 
 	private static Logger log = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Autowired
 	LoginService loginService;
 
 	@Autowired
 	FeedService feedService;
-	
+
 	@Autowired
 	ArticleService articleService;
-	
+
 	@Autowired
 	KeywordService keywordService;
-	
+
 	/**
 	 * @deprecated
 	 */
@@ -68,45 +72,47 @@ public class HomeController {
 	 * @return 표시할 View의 이름
 	 * @throws Exception
 	 */
-	
-	
-	@RequestMapping(value = "/home", method=RequestMethod.GET, produces="application/json", headers="user-agent=mobapp/aos")
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET, produces = "application/json", headers = "user-agent=mobapp/aos")
 	public @ResponseBody List<Feeds> fetchFeedsJson() throws Exception {
 		log.info("mobile accessed");
 		FeedToSimpJsonConverter converter = new FeedToSimpJsonConverter();
-		
+
 		return converter.convert(feedService.outputFeed(), articleService.outputArticles());
 	}
-	
-	@RequestMapping(value = "/home", method=RequestMethod.GET) // "/  home"으로 요청이 들어왔을때 이 Method 호출
-	public String home(HttpServletRequest request, @RequestHeader(value = "User-Agent") String userAgent, Model model) throws Exception {
-		
-			log.info(userAgent);
-			loginService.saveID(/*request.getUserPrincipal().getName()*/);
-			
-			List<Feeds> feedList = feedService.outputFeedByEmail(request.getUserPrincipal().getName());
-			List<Articles> articleList = articleService.outputArticles();
 
-			model.addAttribute("feedList", feedList);
-			model.addAttribute("articleList", articleList);
-		
+	@RequestMapping(value = "/home", method = RequestMethod.GET) // "/ home"으로
+																	// 요청이 들어왔을때
+																	// 이 Method
+																	// 호출
+	public String home(HttpServletRequest request, @RequestHeader(value = "User-Agent") String userAgent, Model model)
+			throws Exception {
+
+		log.info(userAgent);
+		loginService.saveID(/* request.getUserPrincipal().getName() */);
+
+		List<Feeds> feedList = feedService.outputFeedByEmail(request.getUserPrincipal().getName());
+		List<Articles> articleList = articleService.outputArticles();
+
+		model.addAttribute("feedList", feedList);
+		model.addAttribute("articleList", articleList);
 
 		return "/user/home";
 	}
-	
-	
 
-	
-	@RequestMapping(value = "/delete/feed/{feedtitle}", method = RequestMethod.DELETE)
-	public String deleteFeeds(@PathVariable String feedtitle, @RequestParam String feedUrl) throws Exception {
-		
-		feedService.deleteFeed(feedUrl);
-		keywordService.deleteKeyword(feedUrl);
-		
+	@RequestMapping("/delete/feed/{feedtitle}")
+	public String deleteFeeds(@PathVariable String feedtitle) throws Exception {
+
+		List<Feeds> feedList = feedService.outputFeedByTitle(feedtitle);
+
+		if (!feedList.isEmpty()) {
+			String feedUrl = feedList.get(0).getLink();
+			feedService.deleteFeed(feedUrl);
+			keywordService.deleteKeyword(feedUrl);
+		}
+
 		return "redirect:/home";
 	}
-	
-
 
 	/**
 	 * MindMapUI (Experimental)
@@ -114,15 +120,14 @@ public class HomeController {
 	 * @param model
 	 *            JSPContext
 	 * @return 표시할 View의 이름
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping("/mindmap")
 	public String mindmap(Model model) throws Exception {
 
 		List<Feeds> feedList = feedService.outputFeed();
 		List<Articles> articleList = articleService.outputArticles();
-		
-		
+
 		model.addAttribute("feedList", feedList);
 		model.addAttribute("articleList", articleList);
 
@@ -145,38 +150,44 @@ public class HomeController {
 
 		List<Articles> articles = articleService.outputArticlesByTitle(feedtitle);
 
+		List<Feeds> feeds = feedService.outputFeedByTitle(feedtitle);
+
+		model.addAttribute("imageUrl", feeds.get(0).getImageUrl());
+
+		List<Articles> keywordArticles = new ArrayList<Articles>();
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getKeyword() != null) {
+				keywordArticles.add(articles.get(i));
+			}
+		}
 		model.addAttribute("title", articles.get(0).getFeedTitle());
 		if (articles.get(0).getPublishedDate() != null)
 			model.addAttribute("pubDate", articles.get(0).getPublishedDate());
 
+		model.addAttribute("keywordArticleList", keywordArticles);
 		model.addAttribute("articleList", articles);
 
 		return "/user/feedView";
 	}
 
-/*	@RequestMapping("/home/article/{title}")
-	// {title}은 @PathVariable라는 Annotation이 붙은 매개변수 title을 사용
-	public String viewArticle(Model model, @PathVariable String title) {
-		List<SyndFeed> list = FeedList.feedList;
-		SyndFeed feed = null;
-		SyndEntry article = null;
-		for (int i = 0; i < list.size(); i++) {
-			feed = list.get(i);
-			@SuppressWarnings("unchecked")
-			List<SyndEntry> articleList = feed.getEntries();
-			for (int j = 0; j < articleList.size(); j++) {
-				if (articleList.get(j).getTitle().equals(title)) {
-					article = articleList.get(j);
-				}
-			}
-
-		}
-		model.addAttribute("title", article.getTitle());
-		model.addAttribute("pubDate", article.getPublishedDate());
-		model.addAttribute("article", article);
-
-		return "/user/articleView";
-	}*/
+	/*
+	 * @RequestMapping("/home/article/{title}") // {title}은 @PathVariable라는
+	 * Annotation이 붙은 매개변수 title을 사용 public String viewArticle(Model
+	 * model, @PathVariable String title) { List<SyndFeed> list =
+	 * FeedList.feedList; SyndFeed feed = null; SyndEntry article = null; for
+	 * (int i = 0; i < list.size(); i++) { feed = list.get(i);
+	 * 
+	 * @SuppressWarnings("unchecked") List<SyndEntry> articleList =
+	 * feed.getEntries(); for (int j = 0; j < articleList.size(); j++) { if
+	 * (articleList.get(j).getTitle().equals(title)) { article =
+	 * articleList.get(j); } }
+	 * 
+	 * } model.addAttribute("title", article.getTitle());
+	 * model.addAttribute("pubDate", article.getPublishedDate());
+	 * model.addAttribute("article", article);
+	 * 
+	 * return "/user/articleView"; }
+	 */
 
 	/**
 	 * FeedFresh라는 버튼을 누르면 정해진 URI에서 Feed를 읽어 저장하고 다시 Home으로 Redirect

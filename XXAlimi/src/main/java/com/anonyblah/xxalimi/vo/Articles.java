@@ -32,6 +32,9 @@ public class Articles {
 	
 	protected String publishedDate;
 	
+	protected String keyword;
+	
 	protected Date createdDate;
+	
 	
 }
