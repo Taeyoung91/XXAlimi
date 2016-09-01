@@ -61,8 +61,8 @@ public interface ArticlesDao {
 	List<Articles> findArticlesByEmailAndFeedUrl(@Param("feedLink") String feedLink, @Param("email") String email) throws Exception;
 	
 
-	@Insert("insert into articles (usersfeedtitle, username, articlelink, feedtitle, feedlink, articleauthority, articletitle, content, pub_date, cre_date, keyword)"
-			+ "values (#{usersfeedTitle}, #{email}, #{articleLink}, #{feedTitle}, #{feedLink}, #{articleAuthority}, #{articleTitle}, #{content}, #{publishedDate}, now(), #{keyword})")
+	@Insert("insert into articles (usersfeedtitle, username, articlelink, feedtitle, feedlink, articleauthority, articletitle, content, pub_date, cre_date)"
+			+ "values (#{usersfeedTitle}, #{email}, #{articleLink}, #{feedTitle}, #{feedLink}, #{articleAuthority}, #{articleTitle}, #{content}, #{publishedDate}, now())")
 	void insert(Articles article) throws Exception;
 
 	@Results({

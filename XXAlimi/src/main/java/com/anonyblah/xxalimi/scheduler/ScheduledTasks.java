@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import com.anonyblah.xxalimi.rss.RSSFeedParser;
 import com.anonyblah.xxalimi.service.ArticleService;
 import com.anonyblah.xxalimi.service.FeedService;
 import com.anonyblah.xxalimi.service.KeywordService;
-import com.anonyblah.xxalimi.service.LoginService;
 import com.anonyblah.xxalimi.service.SessionService;
 import com.anonyblah.xxalimi.service.UserDetailsImpl;
 import com.anonyblah.xxalimi.vo.Articles;

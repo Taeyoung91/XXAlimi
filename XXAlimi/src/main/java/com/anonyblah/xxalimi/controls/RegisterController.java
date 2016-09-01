@@ -18,8 +18,6 @@ import com.anonyblah.xxalimi.vo.Users;
 @RequestMapping("/register")
 public class RegisterController{
 	
-	@Autowired
-	Users user;
 	
 	@Autowired
 	UserDao userDao;
